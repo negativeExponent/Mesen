@@ -148,11 +148,13 @@ namespace Mesen.GUI.Forms
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
+			this.DialogResult = ((Button)sender).DialogResult;
 			this.Close();
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
+			this.DialogResult = ((Button)sender).DialogResult;
 			this.Close();
 		}
 	}
