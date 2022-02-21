@@ -242,8 +242,18 @@ extern "C" {
 			{ 0 },
 		};
 
+		static const struct retro_system_content_info_override content_overrides[] = {
+			{
+				"nes|fds|unf|unif", /* extensions */
+				false,              /* need_fullpath */
+				false               /* persistent_data */
+			},
+			{ NULL, false, false }
+		};
+
 		retroEnv(RETRO_ENVIRONMENT_SET_VARIABLES, (void*)vars);
 		retroEnv(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
+		retroEnv(RETRO_ENVIRONMENT_SET_CONTENT_INFO_OVERRIDE, (void*)content_overrides);
 	}
 
 	RETRO_API void retro_set_video_refresh(retro_video_refresh_t sendFrame)
@@ -1034,7 +1044,43 @@ extern "C" {
 		_console->GetSettings()->SetControllerType(2, ControllerType::None);
 		_console->GetSettings()->SetControllerType(3, ControllerType::None);
 
-		VirtualFile romData(game->data, game->size, game->path);
+		// Attempt to fetch extended game info
+		const struct retro_game_info_ext *gameExt = NULL;
+		const void *gameData = NULL;
+		size_t gameSize = 0;
+		string gamePath("");
+		if (retroEnv(RETRO_ENVIRONMENT_GET_GAME_INFO_EXT, &gameExt)) {
+			gameData = gameExt->data;
+			gameSize = gameExt->size;
+			if (gameExt->file_in_archive) {
+				// We don't have a 'physical' file in this
+				// case, but the core still needs a filename
+				// in order to detect associated content
+				// (i.e. HdPacks). We therefore fake it, using
+				// the content directory, canonical content
+				// name, and content file extension
+#if defined(_WIN32)
+				char slash = '\\';
+#else
+				char slash = '/';
+#endif
+				gamePath = string(gameExt->dir) +
+							  string(1, slash) +
+							  string(gameExt->name) +
+							  "." +
+							  string(gameExt->ext);
+			} else {
+				gamePath = gameExt->full_path;
+			}
+		} else {
+			// No extended game info; all we have is the
+			// content fullpath from the retro_game_info
+			// struct
+			gamePath = game->path;
+		}
+
+		// Load content
+		VirtualFile romData(gameData, gameSize, gamePath);
 		bool result = _console->Initialize(romData);
 
 		if(result) {
@@ -1084,7 +1130,9 @@ extern "C" {
 
 		info->library_name = "Mesen";
 		info->library_version = _mesenVersion.c_str();
-		info->need_fullpath = false;
+		// need_fullpath is required since HdPacks are
+		// identified via the rom file name
+		info->need_fullpath = true;
 		info->valid_extensions = "nes|fds|unf|unif";
 		info->block_extract = false;
 	}

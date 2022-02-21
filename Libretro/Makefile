@@ -32,6 +32,9 @@ else ifneq ($(findstring Darwin,$(shell uname -a)),)
 ifeq ($(shell uname -p),powerpc)
   arch = ppc
 endif
+ifeq ($(shell uname -p),arm)
+  arch = arm
+endif
 else ifneq ($(findstring MINGW,$(shell uname -a)),)
   system_platform = win
 endif
@@ -46,17 +49,12 @@ TARGET_NAME := mesen
 LIBM        = -lm
 
 ifeq ($(ARCHFLAGS),)
-ifeq ($(archs),ppc)
+ifeq ($(arch),ppc)
    ARCHFLAGS = -arch ppc -arch ppc64
+else ifeq ($(arch),arm)
+   ARCHFLAGS = -arch arm64
 else
    ARCHFLAGS = -arch i386 -arch x86_64
-endif
-endif
-
-ifeq ($(platform), osx)
-ifndef ($(NOUNIVERSAL))
-   CXXFLAGS += $(ARCHFLAGS)
-   LFLAGS += $(ARCHFLAGS)
 endif
 endif
 
@@ -67,7 +65,11 @@ endif
 ifneq (,$(findstring unix,$(platform)))
   EXT ?= so
    TARGET := $(TARGET_NAME)_libretro.$(EXT)
-   fpic := -fPIC -pthread
+   ifneq ($(findstring Haiku,$(shell uname -s)),)
+    fpic := -fPIC -lroot
+   else
+    fpic := -fPIC -pthread
+   endif
    SHARED := -shared -Wl,--version-script=$(LIBRETRO_DIR)/link.T -Wl,--no-undefined
 
 else ifeq ($(platform), linux-portable)
@@ -112,32 +114,62 @@ else ifeq ($(platform), classic_armv7_a7)
 	endif
 #######################################
 
+###########################
+# Raspberry Pi 4 in 64 mode
+else ifneq (,$(findstring rpi4_64,$(platform)))
+  EXT ?= so
+   TARGET := $(TARGET_NAME)_libretro.$(EXT)
+   fpic := -fPIC -pthread
+   SHARED := -shared -Wl,--version-script=$(LIBRETRO_DIR)/link.T -Wl,--no-undefined
+   CFLAGS += -march=armv8-a+crc+simd -mtune=cortex-a72 
+   CXXFLAGS += $(CFLAGS)
+   CPPFLAGS += $(CFLAGS)
+   ASFLAGS += $(CFLAGS)
+###########################
+
 else ifneq (,$(findstring osx,$(platform)))
    TARGET := $(TARGET_NAME)_libretro.dylib
    fpic := -fPIC
    SHARED := -dynamiclib
+ifeq ($(CROSS_COMPILE),1)
+	TARGET_RULE   = -target $(LIBRETRO_APPLE_PLATFORM) -isysroot $(LIBRETRO_APPLE_ISYSROOT)
+	CFLAGS   += $(TARGET_RULE)
+	CXXFLAGS += $(TARGET_RULE)
+	LDFLAGS  += $(TARGET_RULE)
+	ARCHFLAGS =
+endif
+ifeq ($(platform), osx)
+ifndef ($(NOUNIVERSAL))
+   CFLAGS += $(ARCHFLAGS)
+   CXXFLAGS += $(ARCHFLAGS)
+   LFLAGS += $(ARCHFLAGS)
+endif
+endif
+
 else ifneq (,$(findstring ios,$(platform)))
    TARGET := $(TARGET_NAME)_libretro_ios.dylib
   fpic := -fPIC
   SHARED := -dynamiclib
+  DEFINES := -DIOS
+  MINVERSION=
 
 ifeq ($(IOSSDK),)
    IOSSDK := $(shell xcodebuild -version -sdk iphoneos Path)
 endif
-
-  DEFINES := -DIOS
 ifeq ($(platform), ios-arm64)
-  CC = cc -arch arm64 -isysroot $(IOSSDK) -stdlib=libc++
+  CC = clang -arch arm64 -isysroot $(IOSSDK) -stdlib=libc++
+  CXX = clang++ -arch arm64 -isysroot $(IOSSDK) -stdlib=libc++
 else
-  CC = cc -arch armv7 -isysroot $(IOSSDK)
+  CC = clang -arch armv7 -isysroot $(IOSSDK)
+  CXX = clang++ -arch armv7 -isysroot $(IOSSDK)
 endif
 ifeq ($(platform),$(filter $(platform),ios9 ios-arm64))
-CC     += -miphoneos-version-min=8.0
-CXXFLAGS += -miphoneos-version-min=8.0
+  MINVERSION = -miphoneos-version-min=9.0
 else
-CC     += -miphoneos-version-min=5.0
-CXXFLAGS += -miphoneos-version-min=5.0
+  MINVERSION = -miphoneos-version-min=5.0
 endif
+  CFLAGS       += $(MINVERSION)
+  CXXFLAGS     += $(MINVERSION)
 
 else ifeq ($(platform), tvos-arm64)
    TARGET := $(TARGET_NAME)_libretro_tvos.dylib
@@ -148,6 +180,8 @@ else ifeq ($(platform), tvos-arm64)
 ifeq ($(IOSSDK),)
    IOSSDK := $(shell xcodebuild -version -sdk appletvos Path)
 endif
+   CC  = cc -arch arm64  -isysroot $(IOSSDK)
+   CXX = c++ -arch arm64 -isysroot $(IOSSDK)
 
 else ifneq (,$(findstring qnx,$(platform)))
   TARGET := $(TARGET_NAME)_libretro_qnx.so
@@ -158,8 +192,9 @@ else ifeq ($(platform), emscripten)
    fpic := -fPIC
    SHARED := -shared -Wl,--version-script=$(LIBRETRO_DIR)/link.T -Wl,--no-undefined
 else ifeq ($(platform), vita)
-   TARGET := $(TARGET_NAME)_vita.a
+   TARGET := $(TARGET_NAME)_libretro_vita.a
    CC = arm-vita-eabi-gcc
+   CXX = arm-vita-eabi-g++
    AR = arm-vita-eabi-ar
    CXXFLAGS += -Wl,-q -Wall -O3
   STATIC_LINKING = 1
@@ -325,7 +360,7 @@ ifeq (,$(findstring windows_msvc2017,$(platform)))
 endif
 
 CFLAGS   += -D LIBRETRO $(fpic)
-CXXFLAGS += -D LIBRETRO $(fpic) -std=c++14
+CXXFLAGS += -D LIBRETRO $(fpic) -std=c++11
 
 all: $(TARGET)
 
