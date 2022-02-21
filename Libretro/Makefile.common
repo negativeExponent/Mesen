@@ -23,11 +23,10 @@ SOURCES_CXX := $(LIBRETRO_DIR)/libretro.cpp \
                $(CORE_DIR)/APU.cpp \
                $(CORE_DIR)/Assembler.cpp \
                $(CORE_DIR)/AutomaticRomTest.cpp \
-               $(CORE_DIR)/AutoSaveManager.cpp \
+	       $(CORE_DIR)/AutoSaveManager.cpp \
                $(CORE_DIR)/BaseControlDevice.cpp \
                $(CORE_DIR)/BaseExpansionAudio.cpp \
                $(CORE_DIR)/BaseMapper.cpp \
-               $(CORE_DIR)/BaseRenderer.cpp \
                $(CORE_DIR)/BaseVideoFilter.cpp \
                $(CORE_DIR)/BatteryManager.cpp \
                $(CORE_DIR)/BisqwitNtscFilter.cpp \
@@ -89,7 +88,6 @@ SOURCES_CXX := $(LIBRETRO_DIR)/libretro.cpp \
                $(CORE_DIR)/PerformanceTracker.cpp \
                $(CORE_DIR)/PgoUtilities.cpp \
                $(CORE_DIR)/Profiler.cpp \
-               $(CORE_DIR)/RecordedRomTest.cpp \
                $(CORE_DIR)/ReverbFilter.cpp \
                $(CORE_DIR)/RewindData.cpp \
                $(CORE_DIR)/RewindManager.cpp \

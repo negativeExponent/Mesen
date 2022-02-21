@@ -13,6 +13,15 @@
 
 #define checkConstraint(x, y) if(!(x)) { MessageManager::Log(y); return; }
 
+static const char windowsSlash = '\\';
+static const char unixSlash    = '/';
+#if defined(_WIN32)
+#define convertPathToNative(filepath) std::replace(filepath.begin(), filepath.end(), unixSlash, windowsSlash)
+#else
+#define convertPathToNative(filepath) std::replace(filepath.begin(), filepath.end(), windowsSlash, unixSlash)
+#endif
+#define convertPathToNativeVector(vector, idx) if (vector.size() > idx) { convertPathToNative(vector[idx]); }
+
 HdPackLoader::HdPackLoader()
 {
 }
@@ -165,14 +174,17 @@ bool HdPackLoader::LoadPack()
 				ProcessOverscanTag(tokens);
 			} else if(lineContent.substr(0, 5) == "<img>") {
 				lineContent = lineContent.substr(5);
+				convertPathToNative(lineContent);
 				if(!ProcessImgTag(lineContent)) {
 					return false;
 				}
 			} else if(lineContent.substr(0, 7) == "<patch>") {
 				tokens = StringUtilities::Split(lineContent.substr(7), ',');
+				convertPathToNativeVector(tokens, 0);
 				ProcessPatchTag(tokens);
 			} else if(lineContent.substr(0, 12) == "<background>") {
 				tokens = StringUtilities::Split(lineContent.substr(12), ',');
+				convertPathToNativeVector(tokens, 0);
 				ProcessBackgroundTag(tokens, conditions);
 			} else if(lineContent.substr(0, 11) == "<condition>") {
 				tokens = StringUtilities::Split(lineContent.substr(11), ',');
@@ -186,9 +198,11 @@ bool HdPackLoader::LoadPack()
 				ProcessOptionTag(tokens);
 			} else if(lineContent.substr(0, 5) == "<bgm>") {
 				tokens = StringUtilities::Split(lineContent.substr(5), ',');
+				convertPathToNativeVector(tokens, 2);
 				ProcessBgmTag(tokens);
 			} else if(lineContent.substr(0, 5) == "<sfx>") {
 				tokens = StringUtilities::Split(lineContent.substr(5), ',');
+				convertPathToNativeVector(tokens, 2);
 				ProcessSfxTag(tokens);
 			}
 		}

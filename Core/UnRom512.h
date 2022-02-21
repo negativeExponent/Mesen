@@ -48,9 +48,9 @@ protected:
 			SetPpuMemoryMapping(0x2000, 0x3FFF, ChrMemoryType::ChrRam, 0x6000, MemoryAccessType::ReadWrite);
 		}
 
+		_orgPrgRom = vector<uint8_t>(_prgRom, _prgRom + _prgSize);
 		if(HasBattery()) {
 			AddRegisterRange(0x8000, 0xFFFF, MemoryOperation::Read);
-			_orgPrgRom = vector<uint8_t>(_prgRom, _prgRom + _prgSize);
 			ApplySaveData();
 		}
 	}

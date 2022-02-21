@@ -87,6 +87,9 @@ protected:
 		}
 
 		//Last bank
+		if( _romInfo.MapperID != 153 && GetPRGPageCount() >= 0x20 )
+			SelectPRGPage(1, 0x1F);
+		else
 		SelectPRGPage(1, 0x0F);
 	}
 
@@ -156,7 +159,7 @@ protected:
 		switch(addr & 0x000F) {
 			case 0x00: case 0x01: case 0x02: case 0x03: case 0x04: case 0x05: case 0x06: case 0x07:
 				_chrRegs[addr & 0x07] = value;
-				if(_romInfo.MapperID == 153 || GetPRGPageCount() >= 0x20) {
+				if(_romInfo.MapperID == 153) {
 					_prgBankSelect = 0;
 					for(int i = 0; i < 8; i++) {
 						_prgBankSelect |= (_chrRegs[i] & 0x01) << 4;
@@ -173,7 +176,11 @@ protected:
 				break;
 
 			case 0x08:
+				if( _romInfo.MapperID != 153 && GetPRGPageCount() >= 0x20 )
+					_prgPage = value & 0x1F;
+				else
 				_prgPage = value & 0x0F;
+
 				SelectPRGPage(0, _prgPage | _prgBankSelect);
 				break;
 
