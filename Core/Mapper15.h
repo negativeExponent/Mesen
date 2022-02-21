@@ -26,8 +26,9 @@ protected:
 		uint8_t bank = (value & 0x7F) << 1;
 		uint8_t mode = addr & 0x03;
 		
-		SetPpuMemoryMapping(0, 0x1FFF, 0, ChrMemoryType::Default, (mode == 0 || mode == 3) ? MemoryAccessType::Read : MemoryAccessType::ReadWrite);
-		
+		/* Protecting CHR writes only for mode 3 fixes some subor/waixing carts */
+		SetPpuMemoryMapping(0, 0x1FFF, 0, ChrMemoryType::Default, (mode == 3) ? MemoryAccessType::Read : MemoryAccessType::ReadWrite);
+
 		switch(mode) {
 			case 0:
 				SelectPRGPage(0, bank  ^ subBank);
