@@ -22,6 +22,7 @@ private:
 	
 	uint8_t _prgMode;
 	bool _enablePrgAt6000;
+	uint8_t _prgBlock;
 	
 	uint8_t _chrMode;
 	bool _chrBlockMode;
@@ -70,6 +71,7 @@ protected:
 		memset(_chrHighRegs, 0, sizeof(_chrHighRegs));
 
 		_prgMode = 0;
+		_prgBlock = 0;
 		_enablePrgAt6000 = false;
 
 		_chrMode = 0;
@@ -115,7 +117,8 @@ protected:
 
 		Stream(_chrLatch[0], _chrLatch[1], _prgMode, _enablePrgAt6000, _chrMode, _chrBlockMode, _chrBlock, _mirrorChr, _mirroringReg, _advancedNtControl,
 			_disableNtRam, _ntRamSelectBit, _irqEnabled, _irqSource, _lastPpuAddr, _irqCountDirection, _irqFunkyMode, _irqFunkyModeReg, _irqSmallPrescaler,
-			_irqPrescaler, _irqCounter, _irqXorReg, _multiplyValue1, _multiplyValue2, _regRamValue, prgRegs, chrLowRegs, chrHighRegs, ntLowRegs, ntHighRegs);
+			_irqPrescaler, _irqCounter, _irqXorReg, _multiplyValue1, _multiplyValue2, _regRamValue, prgRegs, chrLowRegs, chrHighRegs, ntLowRegs, ntHighRegs,
+			_prgBlock);
 
 		if(!saving) {
 			UpdateState();
@@ -141,33 +144,32 @@ protected:
 	void UpdatePrgState()
 	{
 		bool invertBits = (_prgMode & 0x03) == 0x03;
-		int prgRegs[4] = { InvertPrgBits(_prgRegs[0], invertBits), InvertPrgBits(_prgRegs[1], invertBits),
-								 InvertPrgBits(_prgRegs[2], invertBits), InvertPrgBits(_prgRegs[3], invertBits) };
+		uint8_t lastBank = (_prgMode & 0x04) ? _prgRegs[3] : 0x3F;
 
 		switch(_prgMode & 0x03) {
 			case 0:
-				SelectPrgPage4x(0, (_prgMode & 0x04) ? prgRegs[3] : 0x3C);
+				SelectPrgPage4x(0, ((lastBank & 0x0F) | (_prgBlock << 4)) << 2);
 				if(_enablePrgAt6000) {
-					SetCpuMemoryMapping(0x6000, 0x7FFF, prgRegs[3] * 4 + 3, PrgMemoryType::PrgRom);
+					SetCpuMemoryMapping(0x6000, 0x7FFF, ((_prgRegs[3] * 4 + 3) & 0x3F) | (_prgBlock << 6), PrgMemoryType::PrgRom);
 				}
 				break;
 
 			case 1:
-				SelectPrgPage2x(0, prgRegs[1] << 1);
-				SelectPrgPage2x(1, (_prgMode & 0x04) ? prgRegs[3] : 0x3E);
+				SelectPrgPage2x(0, ((_prgRegs[1] & 0x1F) | (_prgBlock << 5)) << 1);
+				SelectPrgPage2x(1, ((lastBank & 0x1F) | (_prgBlock << 5)) << 1);
 				if(_enablePrgAt6000) {
-					SetCpuMemoryMapping(0x6000, 0x7FFF, prgRegs[3] * 2 + 1, PrgMemoryType::PrgRom);
+					SetCpuMemoryMapping(0x6000, 0x7FFF, ((_prgRegs[3] * 2 + 1) & 0x3F) | (_prgBlock << 6), PrgMemoryType::PrgRom);
 				}
 				break;
 
 			case 2:
 			case 3:
-				SelectPRGPage(0, prgRegs[0]);
-				SelectPRGPage(1, prgRegs[1]);
-				SelectPRGPage(2, prgRegs[2]);
-				SelectPRGPage(3, (_prgMode & 0x04) ? prgRegs[3] : 0x3F);
+				SelectPRGPage(0, (InvertPrgBits(_prgRegs[0], invertBits) & 0x3F) | (_prgBlock << 6));
+				SelectPRGPage(1, (InvertPrgBits(_prgRegs[1], invertBits) & 0x3F) | (_prgBlock << 6));
+				SelectPRGPage(2, (InvertPrgBits(_prgRegs[2], invertBits) & 0x3F) | (_prgBlock << 6));
+				SelectPRGPage(3, (InvertPrgBits(lastBank, invertBits) & 0x3F) | (_prgBlock << 6));
 				if(_enablePrgAt6000) {
-					SetCpuMemoryMapping(0x6000, 0x7FFF, prgRegs[3], PrgMemoryType::PrgRom);
+					SetCpuMemoryMapping(0x6000, 0x7FFF, (_prgRegs[3] & 0x3F) | (_prgBlock << 6), PrgMemoryType::PrgRom);
 				}
 				break;
 		}
@@ -265,31 +267,8 @@ protected:
 				case 0x5801: _multiplyValue2 = value; break;
 				case 0x5803: _regRamValue = value; break;
 			}
-		} else {
+		} else if((addr >= 0xC000) && (addr < 0xD000)) {
 			switch(addr & 0xF007) {
-				case 0x8000: case 0x8001: case 0x8002: case 0x8003:
-				case 0x8004: case 0x8005: case 0x8006: case 0x8007:
-					_prgRegs[addr & 0x03] = value & 0x7F;
-					break;
-
-				case 0x9000: case 0x9001: case 0x9002: case 0x9003:
-				case 0x9004: case 0x9005: case 0x9006: case 0x9007:
-					_chrLowRegs[addr & 0x07] = value;
-					break;
-
-				case 0xA000: case 0xA001: case 0xA002: case 0xA003:
-				case 0xA004: case 0xA005: case 0xA006: case 0xA007:
-					_chrHighRegs[addr & 0x07] = value;
-					break;
-
-				case 0xB000: case 0xB001: case 0xB002: case 0xB003:
-					_ntLowRegs[addr & 0x03] = value;
-					break;
-				
-				case 0xB004: case 0xB005: case 0xB006: case 0xB007:
-					_ntHighRegs[addr & 0x03] = value;
-					break;
-
 				case 0xC000:
 					if(value & 0x01) {
 						_irqEnabled = true;
@@ -316,6 +295,30 @@ protected:
 				case 0xC005: _irqCounter = value ^ _irqXorReg; break;
 				case 0xC006: _irqXorReg = value; break;
 				case 0xC007: _irqFunkyModeReg = value; break;
+			}
+		} else {
+			switch(addr & 0xF807) {
+				case 0x8000: case 0x8001: case 0x8002: case 0x8003:
+					_prgRegs[addr & 0x03] = value & 0x7F;
+					break;
+
+				case 0x9000: case 0x9001: case 0x9002: case 0x9003:
+				case 0x9004: case 0x9005: case 0x9006: case 0x9007:
+					_chrLowRegs[addr & 0x07] = value;
+					break;
+
+				case 0xA000: case 0xA001: case 0xA002: case 0xA003:
+				case 0xA004: case 0xA005: case 0xA006: case 0xA007:
+					_chrHighRegs[addr & 0x07] = value;
+					break;
+
+				case 0xB000: case 0xB001: case 0xB002: case 0xB003:
+					_ntLowRegs[addr & 0x03] = value;
+					break;
+				
+				case 0xB004: case 0xB005: case 0xB006: case 0xB007:
+					_ntHighRegs[addr & 0x03] = value;
+					break;
 
 				case 0xD000:
 					_prgMode = value & 0x07;
@@ -332,6 +335,7 @@ protected:
 					_mirrorChr = (value & 0x80) == 0x80;
 					_chrBlockMode = (value & 0x20) == 0x00;
 					_chrBlock = ((value & 0x18) >> 2) | (value & 0x01);
+					_prgBlock = (value & 0x06) >> 1;
 					break;
 
 			}
