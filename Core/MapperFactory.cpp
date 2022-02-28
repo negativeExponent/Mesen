@@ -336,7 +336,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 24: return new VRC6(VRCVariant::VRC6a);
 		case 25: return new VRC2_4();
 		case 26: return new VRC6(VRCVariant::VRC6b);
-		case 27: return new VRC2_4();
+		case 27: return new Cc21();
 		case 28: return new Action53();
 		case 29: return new SealieComputing();
 		case 30: return new UnRom512();
@@ -509,7 +509,10 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 212: return new Mapper212();
 		case 213: return new Mapper213();
 		case 214: return new Mapper214();
-		case 215: return new MMC3_215();
+		case 215:
+			if (romData.Info.SubMapperID == 1)
+				return new Unl8237A();
+			return new MMC3_215();
 		case 216: return new Mapper216();
 		case 217: return new MMC3_217();
 		case 218: return new Mapper218();
