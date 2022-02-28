@@ -26,6 +26,7 @@
 #include "Bmc64in1NoRepeat.h"
 #include "Bmc70in1.h"
 #include "Bmc190in1.h"
+#include "Bmc1024CA1.h"
 #include "Bmc235.h"
 #include "Bmc255.h"
 #include "Bmc60311C.h"
@@ -605,7 +606,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 323: return new FaridSlrom();
 		case 324: return new FaridUnrom();
 		case 325: return new MMC3_MaliSB();
-		case 327: break; //10-24-C-A1
+		case 327: return new Bmc1024CA1();
 		case 328: return new Rt01();
 		case 329: return new Edu2000();
 		//330
