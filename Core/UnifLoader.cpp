@@ -169,4 +169,8 @@ std::unordered_map<string, int> UnifLoader::_boardMappings = std::unordered_map<
 	{ "DRIPGAME", 284 },
 	{ "60311C", 289 },
 	{ "CHINA_ER_SAN2", 19 }, //Appears to be a mapper 19 hack specific for VirtuaNES (which adds chinese text on top of the PPU's output), unknown if a board actually exists
+	{ "STREETFIGTER-GAME4IN1", 49 },
+	{ "HP2018-A", 260 },
+	{ "JC-016-2", 205 },
+	{ "NEWSTAR-GRM070-8IN1", 333 },
 };
