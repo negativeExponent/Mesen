@@ -34,6 +34,7 @@
 #include "Bmc80013B.h"
 #include "Bmc810544CA1.h"
 #include "Bmc830118C.h"
+#include "Bmc830134C.h"
 #include "Bmc830425C4391T.h"
 #include "Bmc8in1.h"
 #include "BmcG146.h"
@@ -597,7 +598,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 312: return new Kaiser7013B();
 		case 313: return new ResetTxrom();
 		case 314: return new Bmc64in1NoRepeat();
-		case 315: break; //830134C
+		case 315: return new Bmc830134C();
 		//316-318
 		case 319: return new Hp898f();
 		case 320: return new Bmc830425C4391T();

@@ -754,6 +754,12 @@
     <ClInclude Include="Caltron41.h">
       <Filter>Nes\Mappers</Filter>
     </ClInclude>
+    <ClInclude Include="Bmc1024CA1.h">
+      <Filter>Nes\Mappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmc830134C.h">
+      <Filter>Nes\Mappers</Filter>
+    </ClInclude>
     <ClInclude Include="Bmc235.h">
       <Filter>Nes\Mappers</Filter>
     </ClInclude>
