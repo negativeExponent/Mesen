@@ -40,6 +40,7 @@
 #include "BmcHpxx.h"
 #include "BmcK3046.h"
 #include "BmcNtd03.h"
+#include "BmcS2009.h"
 #include "BnRom.h"
 #include "Bs5.h"
 #include "Caltron41.h"
@@ -630,6 +631,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 350: break; //891227
 
 		case 366: return new BmcGn45();
+
+		case 434: return new BmcS2009();
 
 		case 513: return new Sachen9602();
 		//514-517
