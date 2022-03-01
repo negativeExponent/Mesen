@@ -175,4 +175,5 @@ std::unordered_map<string, int> UnifLoader::_boardMappings = std::unordered_map<
 	{ "S-2009", 434 },
 	{ "10-24-C-A1", 327 },
 	{ "830134C", 315 },
+	{ "CTC-09", 335 },
 };
