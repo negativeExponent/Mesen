@@ -808,6 +808,7 @@
     <ClInclude Include="MMC3_BmcF15.h" />
     <ClInclude Include="MMC3_BmcGn26.h" />
     <ClInclude Include="MMC3_BmcK3006.h" />
+    <ClInclude Include="MMC3_BmcK3033.h" />
     <ClInclude Include="MMC3_ChrRam.h" />
     <ClInclude Include="MMC3_Coolboy.h" />
     <ClInclude Include="MMC3_Kof97.h" />
