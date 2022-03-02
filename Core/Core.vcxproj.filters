@@ -1051,6 +1051,9 @@
     <ClInclude Include="MMC3_BmcF15.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
+    <ClInclude Include="MMC3_BmcGn26.h">
+      <Filter>Nes\Mappers\Unif</Filter>
+    </ClInclude>
     <ClInclude Include="Lh10.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
