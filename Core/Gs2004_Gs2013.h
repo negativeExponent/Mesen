@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "BaseMapper.h"
 
-class Gs2013 : public BaseMapper
+class Gs2004_Gs2013 : public BaseMapper
 {
 protected:
 	uint16_t GetPRGPageSize() override { return 0x2000; }
@@ -15,12 +15,12 @@ protected:
 
 	void Reset(bool softReset) override
 	{
-		SetCpuMemoryMapping(0x6000, 0x7FFF, 0x1F, PrgMemoryType::PrgRom);
-		SelectPrgPage4x(0, 0x0F << 2);
+		SetCpuMemoryMapping(0x6000, 0x7FFF, (_prgSize & 0x6000) ? 0x20 : 0x1F, PrgMemoryType::PrgRom);
+		SelectPrgPage4x(0, 0);
 	}
-	
+
 	void WriteRegister(uint16_t addr, uint8_t value) override
 	{
-		SelectPrgPage4x(0, (value & 0x0F) << 2);
+		SelectPrgPage4x(0, value << 2);
 	}
 };

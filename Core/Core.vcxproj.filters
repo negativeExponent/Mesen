@@ -970,10 +970,7 @@
     <ClInclude Include="Edu2000.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
-    <ClInclude Include="Gs2013.h">
-      <Filter>Nes\Mappers\Unif</Filter>
-    </ClInclude>
-    <ClInclude Include="Gs2004.h">
+    <ClInclude Include="Gs2004_Gs2013.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
     <ClInclude Include="NovelDiamond.h">

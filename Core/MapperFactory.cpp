@@ -69,8 +69,7 @@
 #include "Ghostbusters63in1.h"
 #include "Gkcx1.h"
 #include "GoldenFive.h"
-#include "Gs2004.h"
-#include "Gs2013.h"
+#include "Gs2004_Gs2013.h"
 #include "GxRom.h"
 #include "Henggedianzi177.h"
 #include "Henggedianzi179.h"
@@ -571,7 +570,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		//272-273
 		case 274: return new Bmc80013B();
 		//275-282
-		case 283: return new Gs2004();
+		case 283: return new Gs2004_Gs2013();
 		case 284: return new UnlDripGame();
 		case 285: return new A65AS();
 		case 286: return new Bs5();
@@ -657,7 +656,6 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case UnifBoards::Ac08: return new Ac08(); //mapper 42?
 		case UnifBoards::Cc21: return new Cc21();
 		case UnifBoards::Ghostbusters63in1: return new Ghostbusters63in1(); //mapper 226?
-		case UnifBoards::Gs2013: return new Gs2013();
 		case UnifBoards::Malee: return new Malee(); //mapper 42?
 		case UnifBoards::SssNrom256: return new FamicomBox();
 		case UnifBoards::Unl255in1: return new Unl255in1();
