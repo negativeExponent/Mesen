@@ -548,6 +548,7 @@
     <ClInclude Include="Bmc830118C.h" />
     <ClInclude Include="Bmc830425C4391T.h" />
     <ClInclude Include="Bmc8in1.h" />
+    <ClInclude Include="BmcK3036.h" />
     <ClInclude Include="BmcGn45.h" />
     <ClInclude Include="BmcHpxx.h" />
     <ClInclude Include="BmcK3046.h" />
