@@ -37,6 +37,7 @@
 #include "Bmc830134C.h"
 #include "Bmc830425C4391T.h"
 #include "Bmc8in1.h"
+#include "BmcK3036.h"
 #include "BmcG146.h"
 #include "BmcGn45.h"
 #include "BmcHpxx.h"
@@ -623,7 +624,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 337: break; //CTC-12IN1
 		case 338: break; //SA005-A
 		case 339: return new MMC3_BmcK3006();
-		case 340: break; //K-3036
+		case 340: return new BmcK3036();
 		case 341: break; //TJ-03
 		case 342: break; //COOLGIRL
 		//343

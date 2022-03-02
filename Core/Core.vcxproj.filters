@@ -775,6 +775,9 @@
     <ClInclude Include="BmcCtc09.h">
       <Filter>Nes\Mappers</Filter>
     </ClInclude>
+    <ClInclude Include="BmcK3036.h">
+      <Filter>Nes\Mappers</Filter>
+    </ClInclude>
     <ClInclude Include="JyCompany.h">
       <Filter>Nes\Mappers</Filter>
     </ClInclude>
