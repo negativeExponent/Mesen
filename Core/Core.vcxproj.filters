@@ -1003,6 +1003,9 @@
     <ClInclude Include="BmcSa005A.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
+    <ClInclude Include="BmcTj03.h">
+      <Filter>Nes\Mappers\Unif</Filter>
+    </ClInclude>
     <ClInclude Include="Ax5705.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
