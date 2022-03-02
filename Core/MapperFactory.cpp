@@ -192,6 +192,7 @@
 #include "MMC3_BmcF15.h"
 #include "MMC3_BmcGn26.h"
 #include "MMC3_BmcK3006.h"
+#include "MMC3_BmcK3033.h"
 #include "MMC3_ChrRam.h"
 #include "MMC3_Coolboy.h"
 #include "MMC3_Kof97.h"
@@ -605,7 +606,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 319: return new Hp898f();
 		case 320: return new Bmc830425C4391T();
 		//321
-		case 322: break; //K-3033
+		case 322: return new MMC3_BmcK3033();
 		case 323: return new FaridSlrom();
 		case 324: return new FaridUnrom();
 		case 325: return new MMC3_MaliSB();
