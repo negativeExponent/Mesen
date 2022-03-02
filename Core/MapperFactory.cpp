@@ -191,6 +191,7 @@
 #include "MMC3_254.h"
 #include "MMC3_Bmc411120C.h"
 #include "MMC3_BmcF15.h"
+#include "MMC3_BmcGn26.h"
 #include "MMC3_ChrRam.h"
 #include "MMC3_Coolboy.h"
 #include "MMC3_Kof97.h"
@@ -625,7 +626,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 341: break; //TJ-03
 		case 342: break; //COOLGIRL
 		//343
-		case 344: break; //GN26
+		case 344: return new MMC3_BmcGn26();
 		case 345: break; //L6IN1
 		case 346: return new Kaiser7012();
 		//347
