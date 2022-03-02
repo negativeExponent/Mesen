@@ -50,7 +50,7 @@ std::unordered_map<string, int> UnifLoader::_boardMappings = std::unordered_map<
 	{ "G-146", 349 },
 	{ "GK-192", 58 },
 	{ "GS-2004", 283 },
-	{ "GS-2013", UnifBoards::Gs2013 },
+	{ "GS-2013", 283 },
 	{ "Ghostbusters63in1", UnifBoards::Ghostbusters63in1 },
 	{ "H2288", 123 },
 	{ "HKROM", 4 },
