@@ -599,7 +599,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 305: return new Kaiser7031();
 		case 306: return new Kaiser7016();
 		case 307: return new Kaiser7037();
-		case 308: break; //TH2131-1
+		case 308: return new VRC2_4();
 		case 309: return new Lh51();
 		//310-311
 		case 312: return new Kaiser7013B();

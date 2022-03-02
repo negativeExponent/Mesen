@@ -7,6 +7,7 @@ enum class VRCVariant
 {
 	VRC2a,	//Mapper 22
 	VRC2b,	//23
+	VRC2b_308, //308
 	VRC2c,	//25
 	VRC4a,	//21
 	VRC4b,	//25
@@ -33,6 +34,11 @@ class VRC2_4 : public BaseMapper
 		uint8_t _loCHRRegs[8];
 
 		uint8_t _latch = 0;
+
+		// Mapper 308 IRQ
+		uint16_t _irqCounter;
+		uint8_t _irqCounterHigh;
+		bool _irqEnabled;
 
 		void DetectVariant()
 		{
@@ -72,9 +78,10 @@ class VRC2_4 : public BaseMapper
 					break;
 
 				case 27: _variant = VRCVariant::VRC4_27; break; //Untested
+				case 308: _variant = VRCVariant::VRC2b_308; break;
 			}
 
-			_useHeuristics = (_romInfo.SubMapperID == 0) && _romInfo.MapperID != 22 && _romInfo.MapperID != 27;
+			_useHeuristics = (_romInfo.SubMapperID == 0) && _romInfo.MapperID != 22 && _romInfo.MapperID != 27 && _romInfo.MapperID != 308;
 		}
 
 	protected:
@@ -109,7 +116,15 @@ class VRC2_4 : public BaseMapper
 		
 		void ProcessCpuClock() override
 		{
-			if((_useHeuristics && _romInfo.MapperID != 22) || _variant >= VRCVariant::VRC4a) {
+			if(_variant == VRCVariant::VRC2b_308) {
+				if(_irqEnabled) {
+					_irqCounter++;
+					if((_irqCounter & 0x0FFF) == 2048)
+						_irqCounterHigh--;
+					if(!_irqCounterHigh && (_irqCounter & 0x0FFF) < 2048)
+						_console->GetCpu()->SetIrqSource(IRQSource::External);
+				}
+			} else if((_useHeuristics && _romInfo.MapperID != 22) || _variant >= VRCVariant::VRC4a) {
 				//Only VRC4 supports IRQs
 				_irq->ProcessCpuClock();
 			}
@@ -184,6 +199,16 @@ class VRC2_4 : public BaseMapper
 					//One reg contains the high 5 bits 
 					_hiCHRRegs[regNumber] = value & 0x1F;
 				}
+			} else if(_variant == VRCVariant::VRC2b_308) {
+				if(addr == 0xF000) {
+					_irqEnabled = false;
+					_irqCounter = 0;
+					_console->GetCpu()->ClearIrqSource(IRQSource::External);
+				} else if(addr == 0xF001) {
+					_irqEnabled = true;
+				} else if(addr == 0xF003) {
+					_irqCounterHigh = value >> 4;
+				}
 			} else if(addr == 0xF000) {
 				_irq->SetReloadValueNibble(value, false);
 			} else if(addr == 0xF001) {
@@ -197,7 +222,7 @@ class VRC2_4 : public BaseMapper
 			UpdateState();
 		}
 
-	public:		
+	public:
 		uint16_t TranslateAddress(uint16_t addr)
 		{
 			uint32_t A0, A1;
@@ -284,6 +309,7 @@ class VRC2_4 : public BaseMapper
 						break;
 
 					case VRCVariant::VRC2b:
+					case VRCVariant::VRC2b_308:
 						//Mapper 23
 						A0 = addr & 0x01;
 						A1 = (addr >> 1) & 0x01;
@@ -299,7 +325,6 @@ class VRC2_4 : public BaseMapper
 						throw std::runtime_error("not supported");
 						break;
 				}
-
 			}
 
 			return (addr & 0xFF00) | (A1 << 1) | A0;
