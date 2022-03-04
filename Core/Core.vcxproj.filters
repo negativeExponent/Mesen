@@ -1141,6 +1141,9 @@
     <ClInclude Include="UnlD1038.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
+    <ClInclude Include="UnlBj56.h">
+      <Filter>Nes\Mappers\Unif</Filter>
+    </ClInclude>
     <ClInclude Include="GoldenFive.h">
       <Filter>Nes\Mappers</Filter>
     </ClInclude>

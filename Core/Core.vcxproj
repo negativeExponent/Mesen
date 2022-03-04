@@ -955,6 +955,7 @@
     <ClInclude Include="UnifBoards.h" />
     <ClInclude Include="UnifLoader.h" />
     <ClInclude Include="Unl255in1.h" />
+    <ClInclude Include="UnlBj56.h" />
     <ClInclude Include="UnlDripGame.h" />
     <ClInclude Include="UnlDripGameAudio.h" />
     <ClInclude Include="UnlPuzzle.h" />
