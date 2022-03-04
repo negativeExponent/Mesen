@@ -5,9 +5,10 @@
 
 enum class VRCVariant
 {
+	VRC2_308, //308
+	VRC2_524, //308
 	VRC2a,	//Mapper 22
 	VRC2b,	//23
-	VRC2b_308, //308
 	VRC2c,	//25
 	VRC4a,	//21
 	VRC4b,	//25
@@ -78,10 +79,11 @@ class VRC2_4 : public BaseMapper
 					break;
 
 				case 27: _variant = VRCVariant::VRC4_27; break; //Untested
-				case 308: _variant = VRCVariant::VRC2b_308; break;
+				case 308: _variant = VRCVariant::VRC2_308; break;
+				case 524: _variant = VRCVariant::VRC2_524; break;
 			}
 
-			_useHeuristics = (_romInfo.SubMapperID == 0) && _romInfo.MapperID != 22 && _romInfo.MapperID != 27 && _romInfo.MapperID != 308;
+			_useHeuristics = (_romInfo.SubMapperID == 0) && _romInfo.MapperID != 22 && _romInfo.MapperID != 27 && _romInfo.MapperID != 308 && _romInfo.MapperID != 524;
 		}
 
 	protected:
@@ -116,12 +118,18 @@ class VRC2_4 : public BaseMapper
 		
 		void ProcessCpuClock() override
 		{
-			if(_variant == VRCVariant::VRC2b_308) {
+			if(_variant == VRCVariant::VRC2_308) {
 				if(_irqEnabled) {
 					_irqCounter++;
 					if((_irqCounter & 0x0FFF) == 2048)
 						_irqCounterHigh--;
 					if(!_irqCounterHigh && (_irqCounter & 0x0FFF) < 2048)
+						_console->GetCpu()->SetIrqSource(IRQSource::External);
+				}
+			} else if(_variant == VRCVariant::VRC2_524) {
+				if(_irqEnabled) {
+					_irqCounter++;
+					if(_irqCounter & 1024)
 						_console->GetCpu()->SetIrqSource(IRQSource::External);
 				}
 			} else if((_useHeuristics && _romInfo.MapperID != 22) || _variant >= VRCVariant::VRC4a) {
@@ -199,7 +207,7 @@ class VRC2_4 : public BaseMapper
 					//One reg contains the high 5 bits 
 					_hiCHRRegs[regNumber] = value & 0x1F;
 				}
-			} else if(_variant == VRCVariant::VRC2b_308) {
+			} else if(_variant == VRCVariant::VRC2_308) {
 				if(addr == 0xF000) {
 					_irqEnabled = false;
 					_irqCounter = 0;
@@ -209,14 +217,24 @@ class VRC2_4 : public BaseMapper
 				} else if(addr == 0xF003) {
 					_irqCounterHigh = value >> 4;
 				}
-			} else if(addr == 0xF000) {
-				_irq->SetReloadValueNibble(value, false);
-			} else if(addr == 0xF001) {
-				_irq->SetReloadValueNibble(value, true);
-			} else if(addr == 0xF002) {
-				_irq->SetControlValue(value);
-			} else if(addr == 0xF003) {
-				_irq->AcknowledgeIrq();
+			} else if(_variant == VRCVariant::VRC2_524) {
+				if(addr == 0xF002) {
+					_irqEnabled = true;
+				} else if(addr == 0xF003) {
+					_irqEnabled = false;
+					_irqCounter = 0;
+					_console->GetCpu()->ClearIrqSource(IRQSource::External);
+				}
+			} else {
+				if(addr == 0xF000) {
+					_irq->SetReloadValueNibble(value, false);
+				} else if(addr == 0xF001) {
+					_irq->SetReloadValueNibble(value, true);
+				} else if(addr == 0xF002) {
+					_irq->SetControlValue(value);
+				} else if(addr == 0xF003) {
+					_irq->AcknowledgeIrq();
+				}
 			}
 
 			UpdateState();
@@ -278,9 +296,18 @@ class VRC2_4 : public BaseMapper
 						break;
 
 					case VRCVariant::VRC4_27:
+					case VRCVariant::VRC2_308:
 						//Mapper 27
 						A0 = addr & 0x01;
 						A1 = (addr >> 1) & 0x01;
+						break;
+					
+					case VRCVariant::VRC2_524:
+						//Mapper 524
+						A0 = addr & 0x01;
+						A1 = (addr >> 1) & 0x01;
+						A0 |= (addr >> 2) & 0x01;
+						A1 |= (addr >> 3) & 0x01;
 						break;
 
 					case VRCVariant::VRC2c:
@@ -309,7 +336,6 @@ class VRC2_4 : public BaseMapper
 						break;
 
 					case VRCVariant::VRC2b:
-					case VRCVariant::VRC2b_308:
 						//Mapper 23
 						A0 = addr & 0x01;
 						A1 = (addr >> 1) & 0x01;
