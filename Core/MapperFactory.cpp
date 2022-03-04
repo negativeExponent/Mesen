@@ -651,7 +651,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 521: return new DreamTech01();
 		case 522: return new Lh10();
 		//523
-		case 524: break; //900218
+		case 524: return new VRC2_4();
 		case 525: break; //KS7021A
 		case 526: break; //BJ56
 		case 527: break; //AX40G
