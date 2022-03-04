@@ -261,6 +261,7 @@
 #include "Unl158B.h"
 #include "Unl255in1.h"
 #include "Unl8237A.h"
+#include "Unl831128C.h"
 #include "UnlD1038.h"
 #include "UnlDripGame.h"
 #include "UnlPci556.h"
@@ -655,7 +656,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 525: break; //KS7021A
 		case 526: break; //BJ56
 		case 527: break; //AX40G
-		case 528: break; //831128C
+		case 528: return new Unl831128C();
 		case 529: return new T230();
 		case 530: return new Ax5705();
 
