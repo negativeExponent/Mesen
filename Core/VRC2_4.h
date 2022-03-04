@@ -6,7 +6,8 @@
 enum class VRCVariant
 {
 	VRC2_308, //308
-	VRC2_524, //308
+	VRC2_524, //524
+	VRC2_527, //527
 	VRC2a,	//Mapper 22
 	VRC2b,	//23
 	VRC2c,	//25
@@ -81,9 +82,10 @@ class VRC2_4 : public BaseMapper
 				case 27: _variant = VRCVariant::VRC4_27; break; //Untested
 				case 308: _variant = VRCVariant::VRC2_308; break;
 				case 524: _variant = VRCVariant::VRC2_524; break;
+				case 527: _variant = VRCVariant::VRC2_527; break;
 			}
 
-			_useHeuristics = (_romInfo.SubMapperID == 0) && _romInfo.MapperID != 22 && _romInfo.MapperID != 27 && _romInfo.MapperID != 308 && _romInfo.MapperID != 524;
+			_useHeuristics = (_romInfo.SubMapperID == 0) && _romInfo.MapperID != 22 && _romInfo.MapperID != 27 && _romInfo.MapperID != 308 && _romInfo.MapperID != 524  && _romInfo.MapperID != 527;
 		}
 
 	protected:
@@ -147,6 +149,13 @@ class VRC2_4 : public BaseMapper
 					page >>= 1;
 				}
 				SelectCHRPage(i, page);
+			}
+
+			if(_variant == VRCVariant::VRC2_527) {
+				SetNametable(0, (_hiCHRRegs[0] >> 3) & 0x01);
+				SetNametable(1, (_hiCHRRegs[0] >> 3) & 0x01);
+				SetNametable(2, (_hiCHRRegs[1] >> 3) & 0x01);
+				SetNametable(3, (_hiCHRRegs[1] >> 3) & 0x01);
 			}
 
 			if(_prgMode == 0) {
@@ -297,6 +306,7 @@ class VRC2_4 : public BaseMapper
 
 					case VRCVariant::VRC4_27:
 					case VRCVariant::VRC2_308:
+					case VRCVariant::VRC2_527:
 						//Mapper 27
 						A0 = addr & 0x01;
 						A1 = (addr >> 1) & 0x01;
