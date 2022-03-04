@@ -87,6 +87,7 @@ private:
 		if(fourCC.compare("MAPR") == 0) {
 			_mapperName = ReadString(data, chunkEnd);
 			if(_mapperName.size() > 0) {
+				romData.Info.BoardName = _mapperName;
 				romData.Info.MapperID = GetMapperID(_mapperName);
 				if(romData.Info.MapperID == UnifBoards::UnknownBoard) {
 					Log("[UNIF] Error: Unknown board");

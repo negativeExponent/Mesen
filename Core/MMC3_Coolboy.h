@@ -9,7 +9,6 @@ private:
 	uint8_t _exRegs[4];
 
 protected:
-	uint16_t RegisterStartAddress() override { return 0x6000; }
 	uint32_t GetChrRamSize() override { return 0x40000; }
 
 	void Reset(bool softReset) override
@@ -19,6 +18,13 @@ protected:
 		MMC3::ResetMmc3();
 
 		UpdateState();
+
+		if(_romInfo.MapperID == 224 || _romInfo.SubMapperID == 1) {
+			AddRegisterRange(0x5000, 0x5FFF, MemoryOperation::Write);
+			RemoveRegisterRange(0x6000, 0x7FFF);
+		} else {
+			AddRegisterRange(0x6000, 0x7FFF, MemoryOperation::Write);
+		}
 	}
 
 	void StreamState(bool saving) override
@@ -91,8 +97,10 @@ protected:
 	void WriteRegister(uint16_t addr, uint8_t value) override
 	{
 		if(addr < 0x8000) {
-			if(GetState().RegA001 & 0x80) {
-				WritePrgRam(addr, value);
+			if(addr >= 0x6000) {
+				if(GetState().RegA001 & 0x80) {
+					WritePrgRam(addr, value);
+				}
 			}
 
 			if((_exRegs[3] & 0x90) != 0x80) {
