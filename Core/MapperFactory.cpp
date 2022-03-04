@@ -572,7 +572,11 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 265: return new T262();
 		case 266: return new CityFighter();
 		//267
-		case 268: return new MMC3_Coolboy();
+		case 268:
+			if(romData.Info.BoardName.compare("MINDKIDS") == 0) {
+				romData.Info.SubMapperID = 1;
+			}
+			return new MMC3_Coolboy();
 		//269-270
 		case 271: break; //22026
 		//272-273

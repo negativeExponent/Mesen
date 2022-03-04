@@ -71,6 +71,7 @@ struct RomInfo
 
 	uint32_t FilePrgOffset = 0;
 
+	string BoardName;
 	uint16_t MapperID = 0;
 	uint8_t SubMapperID = 0;
 	
