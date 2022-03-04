@@ -362,6 +362,6 @@ class VRC2_4 : public BaseMapper
 			ArrayInfo<uint8_t> loChrRegs = { _loCHRRegs, 8 };
 			ArrayInfo<uint8_t> hiChrRegs = { _hiCHRRegs, 8 };
 			SnapshotInfo irq{ _irq.get() };
-			Stream(_prgReg0, _prgReg1, _prgMode, loChrRegs, hiChrRegs, _latch, irq);
+			Stream(_prgReg0, _prgReg1, _prgMode, loChrRegs, hiChrRegs, _latch, irq, _irqCounter, _irqCounterHigh, _irqEnabled);
 		}
 };
