@@ -51,7 +51,7 @@ protected:
 	{
 		if(addr <= 0x7FFF) {
 			if(CanWriteToWorkRam()) {
-				_workRam[addr - 0x6000] = value;
+				WritePrgRam(addr, value);
 				if ((_exReg & 0x07) == 0) {
 					_exReg = addr & 0x3F;
 					UpdatePrgMapping();
