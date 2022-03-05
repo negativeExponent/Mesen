@@ -47,6 +47,8 @@
 #include "BmcSa005A.h"
 #include "BmcTj03.h"
 #include "BmcCtc09.h"
+#include "UnlKs106C.h"
+#include "BmcResetNromX1n1.h"
 #include "BnRom.h"
 #include "Bs5.h"
 #include "Caltron41.h"
@@ -644,7 +646,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 348: return new Bmc830118C();
 		case 349: return new BmcG146();
 		case 350: break; //891227
-
+		//352:
 		case 366: return new BmcGn45();
 
 		case 434: return new BmcS2009();
@@ -673,6 +675,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case UnifBoards::Unl255in1: return new Unl255in1();
 		case UnifBoards::Unl8237A: return new Unl8237A(); //mapper 215.1
 		case UnifBoards::UnlPuzzle: return new UnlPuzzle();
+		case UnifBoards::Ks106C: return new UnlKs106C(); //mapper 352, sub 1
+		case UnifBoards::ResetNromX1n1: return new BmcResetNromX1n1(); //352
 
 		case MapperFactory::StudyBoxMapperID: return new StudyBox();
 		case MapperFactory::NsfMapperID: return new NsfMapper();

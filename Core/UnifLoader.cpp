@@ -189,4 +189,6 @@ std::unordered_map<string, int> UnifLoader::_boardMappings = std::unordered_map<
 	{ "BJ-56", 526 },
 	{ "KS7021A", 525 },
 	{ "MINDKIDS", 268 },
+	{ "KS106C", UnifBoards::Ks106C },
+	{ "RESETNROM-XIN1", UnifBoards::ResetNromX1n1 },
 };
