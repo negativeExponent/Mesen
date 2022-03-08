@@ -556,6 +556,8 @@
     <ClInclude Include="BmcSa005A.h" />
     <ClInclude Include="BmcTj03.h" />
     <ClInclude Include="BmcCtc09.h" />
+    <ClInclude Include="BmcCtc12in1.h" />
+    <ClInclude Include="Bmc891227.h" />
     <ClInclude Include="CityFighter.h" />
     <ClInclude Include="ConsolePauseHelper.h" />
     <ClInclude Include="ControlDeviceState.h" />
