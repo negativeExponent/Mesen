@@ -1,0 +1,67 @@
+#pragma once
+#include "stdafx.h"
+#include "BaseMapper.h"
+
+class Bmc891227 : public BaseMapper
+{
+private:
+	uint8_t _reg;
+
+protected:
+	virtual uint16_t GetPRGPageSize() override { return 0x4000; }
+	virtual uint16_t GetCHRPageSize() override { return 0x2000; }
+
+	void InitMapper() override
+	{
+		SelectCHRPage(0, 0);
+	}
+
+	void Reset(bool softReset) override
+	{
+		if(!softReset) {
+			_reg = 0;
+		}
+		UpdateState();
+	}
+
+	void StreamState(bool saving) override
+	{
+		BaseMapper::StreamState(saving);
+		Stream(_reg);
+	}
+
+	void UpdateState() {
+		uint8_t prgPage = _reg & 0x1F;
+
+		SetCpuMemoryMapping(0x6000, 0x7FFF, PrgMemoryType::PrgRom, 0x2000, MemoryAccessType::Read);
+
+		switch((_reg & 0x60) >> 5) {
+			case 0:		// NROM-128
+				SelectPRGPage(0, _reg & 0x1F);
+				SelectPRGPage(1, _reg & 0x1F);
+				break;
+
+			case 1:		// NROM-256
+				SelectPrgPage2x(0, _reg & 0x1E);
+				break;
+
+			default:	// UNROM
+				SelectPRGPage(0, _reg & 0x3F);
+				SelectPRGPage(1, (_reg & 0x3F) | 7);
+				break;
+		}
+		SetMirroringType(_reg & 0x80 ? MirroringType::Horizontal : MirroringType::Vertical);
+	}
+
+	void WriteRegister(uint16_t addr, uint8_t value) override
+	{
+		if(addr < 0xC000) {
+			_reg &= 0x07;
+			_reg |= value & ~0x07;
+		} else {
+			_reg &= _reg & ~0x07;
+			_reg |= value & 0x07;
+		}
+		UpdateState();
+	}
+};

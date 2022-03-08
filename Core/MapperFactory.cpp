@@ -36,6 +36,7 @@
 #include "Bmc830118C.h"
 #include "Bmc830134C.h"
 #include "Bmc830425C4391T.h"
+#include "Bmc891227.h"
 #include "Bmc8in1.h"
 #include "BmcK3036.h"
 #include "BmcG146.h"
@@ -47,6 +48,7 @@
 #include "BmcSa005A.h"
 #include "BmcTj03.h"
 #include "BmcCtc09.h"
+#include "BmcCtc12in1.h"
 #include "UnlKs106C.h"
 #include "BmcResetNromX1n1.h"
 #include "BnRom.h"
@@ -632,7 +634,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		//334
 		case 335: return new BmcCtc09();
 		case 336: return new BmcK3046();
-		case 337: break; //CTC-12IN1
+		case 337: return new BmcCtc12in1();
 		case 338: return new BmcSa005A();
 		case 339: return new MMC3_BmcK3006();
 		case 340: return new BmcK3036();
@@ -645,7 +647,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		//347
 		case 348: return new Bmc830118C();
 		case 349: return new BmcG146();
-		case 350: break; //891227
+		case 350: return new Bmc891227();
 		//352:
 		case 366: return new BmcGn45();
 
