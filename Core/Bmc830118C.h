@@ -19,6 +19,7 @@ protected:
 	{
 		_reg = 0;
 		MMC3::Reset(softReset);
+		UpdateState();
 	}
 
 	void StreamState(bool saving) override
