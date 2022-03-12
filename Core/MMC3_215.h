@@ -80,6 +80,7 @@ protected:
 		if(_exRegs[0] & 0x80) {
 			bank <<= 1;
 			if(_exRegs[0] & 0x20) {
+				bank &= 0xFC;
 				MMC3::SelectPRGPage(0, bank);
 				MMC3::SelectPRGPage(1, bank + 1);
 				MMC3::SelectPRGPage(2, bank + 2);
