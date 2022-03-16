@@ -195,6 +195,8 @@
 #include "MMC3_249.h"
 #include "MMC3_250.h"
 #include "MMC3_254.h"
+#include "MMC3_422.h"
+#include "MMC3_534.h"
 #include "MMC3_Bmc411120C.h"
 #include "MMC3_BmcF15.h"
 #include "MMC3_BmcGn26.h"
@@ -651,6 +653,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		//352:
 		case 366: return new BmcGn45();
 
+		case 422: return new MMC3_422();
 		case 434: return new BmcS2009();
 
 		case 513: return new Sachen9602();
@@ -668,6 +671,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 528: return new Unl831128C();
 		case 529: return new T230();
 		case 530: return new Ax5705();
+		case 534: return new MMC3_534();
 
 		case UnifBoards::Ac08: return new Ac08(); //mapper 42?
 		case UnifBoards::Cc21: return new Cc21();
