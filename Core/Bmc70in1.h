@@ -82,14 +82,15 @@ protected:
 	{
 		if(addr & 0x4000) { 
 			_bankMode = addr & 0x30;
-			_prgReg = addr & 0x07;
+			_prgReg = addr & 0x0F;
 		} else {
 			SetMirroringType(addr & 0x20 ? MirroringType::Horizontal : MirroringType::Vertical);
 			if(_useOuterBank) {
-				_outerBank = (addr & 0x03) << 3;
+				_outerBank = (addr & 0x07) << 3;
 			} else {
-				_chrReg = addr & 0x07;
+				_chrReg = addr & 0x0F;
 			}
+			
 		}
 
 		UpdateState();
