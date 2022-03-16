@@ -24,7 +24,7 @@ private:
 		0x09, 0x19, 0x49, 0x59, 0x09, 0x19, 0x49, 0x59, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	};
 
-	uint8_t _exRegs[6];
+	uint8_t _exRegs[7];
 
 protected:
 	uint16_t RegisterStartAddress() override { return 0x8000; }
@@ -35,23 +35,38 @@ protected:
 	{
 		_exRegs[5] = 3;
 		MMC3::InitMapper();
-		AddRegisterRange(0x4800, 0x4FFF, MemoryOperation::Write);
-		AddRegisterRange(0x6800, 0x6FFF, MemoryOperation::Write);
-		AddRegisterRange(0x5000, 0x5FFF, MemoryOperation::Write);
-		AddRegisterRange(0x5800, 0x5FFF, MemoryOperation::Read);
+		if(_romInfo.SubMapperID == 0) {
+			AddRegisterRange(0x4800, 0x4FFF, MemoryOperation::Write);
+			AddRegisterRange(0x6800, 0x6FFF, MemoryOperation::Write);
+			AddRegisterRange(0x5000, 0x5FFF, MemoryOperation::Write);
+			AddRegisterRange(0x5800, 0x5FFF, MemoryOperation::Read);
+		}
 		RemoveRegisterRange(0x8000, 0xFFFF, MemoryOperation::Read);
 	}
 
 	void StreamState(bool saving) override
 	{
 		MMC3::StreamState(saving);
-		ArrayInfo<uint8_t> exRegs { _exRegs, 6 };
+		ArrayInfo<uint8_t> exRegs { _exRegs, 7 };
 		Stream(exRegs);
 	}
 
 	void UpdatePrgMapping() override
 	{
-		SelectPrgPage4x(0, _exRegs[5] << 2);
+		if(_romInfo.SubMapperID == 1) {
+			SelectPrgPage4x(0, MMC3::_registers[6]);
+		} else {
+			SelectPrgPage4x(0, _exRegs[5] << 2);
+		}
+	}
+
+	void UpdateMirroring() override
+	{
+		if(_romInfo.SubMapperID == 1) {
+			MMC3::UpdateMirroring();
+		} else {
+			SetMirroringType(_exRegs[6] ? MirroringType::Horizontal : MirroringType::Vertical);
+		}
 	}
 
 	uint8_t ReadRegister(uint16_t addr) override
@@ -69,6 +84,7 @@ protected:
 			}
 		} else if(addr < 0x8000) {
 			_exRegs[5] = (value & 0x01) | ((value >> 3) & 0x02);
+			_exRegs[6] = (value >> 5) & 0x01;
 			UpdatePrgMapping();
 		} else {
 			MMC3::WriteRegister(addr, value);
