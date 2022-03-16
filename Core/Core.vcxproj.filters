@@ -784,6 +784,12 @@
     <ClInclude Include="MMC3_245.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
+    <ClInclude Include="MMC3_422.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="MMC3_534.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
     <ClInclude Include="Waixing178.h">
       <Filter>Nes\Mappers\Waixing</Filter>
     </ClInclude>
