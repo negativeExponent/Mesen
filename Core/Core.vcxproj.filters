@@ -943,6 +943,9 @@
     <ClInclude Include="Mapper216.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper217.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="MMC3_123.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
@@ -953,9 +956,6 @@
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
     <ClInclude Include="MMC3_215.h">
-      <Filter>Nes\Mappers\MMC</Filter>
-    </ClInclude>
-    <ClInclude Include="MMC3_217.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
     <ClInclude Include="MMC3_Coolboy.h">
