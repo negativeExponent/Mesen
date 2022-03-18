@@ -195,6 +195,7 @@
 #include "MMC3_249.h"
 #include "MMC3_250.h"
 #include "MMC3_254.h"
+#include "MMC3_334.h"
 #include "MMC3_422.h"
 #include "MMC3_534.h"
 #include "MMC3_Bmc411120C.h"
@@ -633,7 +634,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 331: return new Bmc12in1();
 		case 332: return new Super40in1Ws();
 		case 333: return new Bmc8in1(); // + NEWSTAR-GRM070-8IN1
-		//334
+		case 334: return new MMC3_334();
 		case 335: return new BmcCtc09();
 		case 336: return new BmcK3046();
 		case 337: return new BmcCtc12in1();
