@@ -195,11 +195,13 @@
 #include "MMC3_249.h"
 #include "MMC3_250.h"
 #include "MMC3_254.h"
+#include "MMC3_267.h"
 #include "MMC3_334.h"
 #include "MMC3_353.h"
 #include "MMC3_364.h"
 #include "MMC3_370.h"
 #include "MMC3_372.h"
+#include "MMC3_377.h"
 #include "MMC3_422.h"
 #include "MMC3_534.h"
 #include "MMC3_Bmc411120C.h"
@@ -582,7 +584,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 264: return new Yoko();
 		case 265: return new T262();
 		case 266: return new CityFighter();
-		//267
+		case 267: return new MMC3_267();
 		case 268:
 			if(romData.Info.BoardName.compare("MINDKIDS") == 0) {
 				romData.Info.SubMapperID = 1;
@@ -661,6 +663,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 366: return new BmcGn45();
 		case 370: return new MMC3_370();
 		case 372: return new MMC3_372();
+		case 377: return new MMC3_377();
 
 		case 422: return new MMC3_422();
 		case 434: return new BmcS2009();
