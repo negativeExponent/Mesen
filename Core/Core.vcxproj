@@ -791,12 +791,14 @@
     <ClInclude Include="MMC3_249.h" />
     <ClInclude Include="MMC3_250.h" />
     <ClInclude Include="MMC3_254.h" />
+    <ClInclude Include="MMC3_267.h" />
     <ClInclude Include="MMC3_45.h" />
     <ClInclude Include="MMC3_334.h" />
     <ClInclude Include="MMC3_353.h" />
     <ClInclude Include="MMC3_364.h" />
     <ClInclude Include="MMC3_370.h" />
     <ClInclude Include="MMC3_372.h" />
+    <ClInclude Include="MMC3_377.h" />
     <ClInclude Include="MMC3_422.h" />
     <ClInclude Include="MMC3_534.h" />
     <ClInclude Include="Mapper57.h" />
