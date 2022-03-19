@@ -17,7 +17,6 @@ protected:
 	void InitMapper() override
 	{
 		MMC3::InitMapper();
-		RemoveRegisterRange(0xC000, 0xFFFF, MemoryOperation::Read);
 	}
 
 	void Reset(bool softreset) override
@@ -29,7 +28,7 @@ protected:
 	void StreamState(bool saving) override
 	{
 		MMC3::StreamState(saving);
-		Stream(_exReg[2]);
+		Stream(_exReg[0], _exReg[1]);
 	}
 
 	void SelectCHRPage(uint16_t slot, uint16_t page, ChrMemoryType memoryType = ChrMemoryType::Default) override
