@@ -1474,6 +1474,9 @@
     <ClInclude Include="MMC3_267.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
+    <ClInclude Include="MMC3_376.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
     <ClInclude Include="MMC3_377.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
