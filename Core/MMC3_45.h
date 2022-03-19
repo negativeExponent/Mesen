@@ -6,9 +6,10 @@ class MMC3_45 : public MMC3
 {
 private:
 	uint8_t _regIndex;
-	uint8_t _reg[4];
 
 protected:
+	uint8_t _reg[4];
+
 	virtual uint16_t RegisterStartAddress() override { return 0x6000; }
 	virtual uint16_t RegisterEndAddress() override { return 0xFFFF; }
 
