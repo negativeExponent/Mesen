@@ -26,7 +26,7 @@ protected:
 	void StreamState(bool saving) override
 	{
 		MMC3::StreamState(saving);
-		Stream(_reg[2]);
+		Stream(_reg[0], _reg[1]);
 	}
 
 	void SelectCHRPage(uint16_t slot, uint16_t page, ChrMemoryType memoryType = ChrMemoryType::Default) override
