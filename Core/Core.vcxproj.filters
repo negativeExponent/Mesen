@@ -1507,6 +1507,12 @@
     <ClInclude Include="MMC3_377.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
+    <ClInclude Include="MMC3_432.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
+    <ClInclude Include="MMC3_441.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
     <ClInclude Include="FamicomBox.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
