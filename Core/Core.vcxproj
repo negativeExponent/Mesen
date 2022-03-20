@@ -807,6 +807,7 @@
     <ClInclude Include="MMC3_401.h" />
     <ClInclude Include="MMC3_410.h" />
     <ClInclude Include="MMC3_411.h" />
+    <ClInclude Include="MMC3_412.h" />
     <ClInclude Include="MMC3_422.h" />
     <ClInclude Include="MMC3_534.h" />
     <ClInclude Include="Mapper57.h" />
