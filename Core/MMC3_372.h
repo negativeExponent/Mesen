@@ -9,11 +9,9 @@ private:
 
 	void SelectCHRPage(uint16_t slot, uint16_t page, ChrMemoryType memoryType = ChrMemoryType::Default) override
 	{
-		uint8_t mask = 0xFF >> (0x0F - (_reg[2] & 0x0F));
 		if(!(_reg[2] & 0x20)) {
-			page &= mask;
+			page &= 0xFF >> (0x0F - (_reg[2] & 0x0F));
 			page |= _reg[0] | ((_reg[2] & 0xF0) << 4);
-			MMC3::SelectCHRPage(slot, page);
 		}
 		MMC3::SelectCHRPage(slot, page, (_reg[2] & 0x20) ? ChrMemoryType::ChrRam : ChrMemoryType::ChrRom);
 	}
