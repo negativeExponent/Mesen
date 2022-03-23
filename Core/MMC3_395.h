@@ -8,8 +8,8 @@ private:
 	uint8_t _exReg[2];
 
 protected:
-	uint16_t RegisterStartAddress() { return 0x6000; }
-	uint16_t RegisterEndAddress() { return 0xFFFF; }
+	uint16_t RegisterStartAddress() override { return 0x6000; }
+	uint16_t RegisterEndAddress() override { return 0xFFFF; }
 
 	void Reset(bool softreset) override
 	{
