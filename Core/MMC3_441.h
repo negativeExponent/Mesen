@@ -8,8 +8,8 @@ private:
 	uint8_t _reg;
 
 protected:
-	uint16_t RegisterStartAddress() { return 0x6000; }
-	uint16_t RegisterEndAddress() { return 0xFFFF; }
+	uint16_t RegisterStartAddress() override { return 0x6000; }
+	uint16_t RegisterEndAddress() override { return 0xFFFF; }
 
 	void InitMapper() override
 	{

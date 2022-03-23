@@ -9,8 +9,8 @@ private:
 
 protected:
 	uint32_t GetDipSwitchCount() override { return 2; }
-	uint16_t RegisterStartAddress() { return 0x6000; }
-	uint16_t RegisterEndAddress() { return 0xFFFF; }
+	uint16_t RegisterStartAddress() override { return 0x6000; }
+	uint16_t RegisterEndAddress() override { return 0xFFFF; }
 	bool AllowRegisterRead() override { return true; }
 
 	void InitMapper() override
