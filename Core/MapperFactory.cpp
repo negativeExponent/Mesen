@@ -411,6 +411,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 52: return new MMC3_52();
 		case 53: return new Supervision();
 		case 54: return new NovelDiamond();
+		case 55: return new Malee();
 		case 56: return new Kaiser202();
 		case 57: return new Mapper57();
 		case 58: return new Mapper58();
@@ -728,7 +729,6 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case UnifBoards::Ac08: return new Ac08(); //mapper 42?
 		case UnifBoards::Cc21: return new Cc21();
 		case UnifBoards::Ghostbusters63in1: return new Ghostbusters63in1(); //mapper 226?
-		case UnifBoards::Malee: return new Malee(); //mapper 42?
 		case UnifBoards::SssNrom256: return new FamicomBox();
 		case UnifBoards::Unl255in1: return new Unl255in1();
 		case UnifBoards::Unl8237A: return new Unl8237A(); //mapper 215.1
