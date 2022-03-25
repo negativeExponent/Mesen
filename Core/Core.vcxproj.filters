@@ -433,6 +433,9 @@
     <ClInclude Include="Mapper246.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper319.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Sunsoft89.h">
       <Filter>Nes\Mappers\Sunsoft</Filter>
     </ClInclude>
