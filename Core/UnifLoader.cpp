@@ -154,7 +154,7 @@ std::unordered_map<string, int> UnifLoader::_boardMappings = std::unordered_map<
 	{ "158B", 258 },
 	{ "DRAGONFIGHTER", 292 },
 	{ "EH8813A", 519 },
-	{ "HP898F", 319 },
+	{ "HP898F", UnifBoards::Hp898f },
 	{ "F-15", 259 },
 	{ "RT-01", 328 },
 	{ "81-01-31-C", UnifBoards::UnknownBoard },

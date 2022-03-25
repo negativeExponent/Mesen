@@ -157,6 +157,7 @@
 #include "Mapper244.h"
 #include "Mapper246.h"
 #include "Mapper253.h"
+#include "Mapper319.h"
 #include "Mapper375.h"
 #include "Mapper380.h"
 #include "Mapper449.h"
@@ -644,7 +645,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 314: return new Bmc64in1NoRepeat();
 		case 315: return new Bmc830134C();
 		//316-318
-		case 319: return new Hp898f();
+		case 319: return new Mapper319();
 		case 320: return new Bmc830425C4391T();
 		//321
 		case 322: return new MMC3_BmcK3033();
@@ -735,6 +736,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case UnifBoards::UnlPuzzle: return new UnlPuzzle();
 		case UnifBoards::Ks106C: return new UnlKs106C(); //mapper 352, sub 1
 		case UnifBoards::ResetNromX1n1: return new BmcResetNromX1n1(); //352
+		case UnifBoards::Hp898f: return new Hp898f(); // Mapper 319 with the differentt bank order, specific for UNIF dump of Prima Soft 9999999-in-1
 
 		case MapperFactory::StudyBoxMapperID: return new StudyBox();
 		case MapperFactory::NsfMapperID: return new NsfMapper();
