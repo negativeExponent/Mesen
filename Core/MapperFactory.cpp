@@ -150,6 +150,7 @@
 #include "Mapper230.h"
 #include "Mapper231.h"
 #include "Mapper233.h"
+#include "Mapper237.h"
 #include "Mapper234.h"
 #include "Mapper240.h"
 #include "Mapper241.h"
@@ -577,6 +578,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 234: return new Mapper234();
 		case 235: return new Bmc235();
 		case 236: return new Bmc70in1();
+		case 237: return new Mapper237();
 		case 238: return new MMC3_238();
 		case 240: return new Mapper240();
 		case 241: return new Mapper241();

@@ -424,6 +424,9 @@
     <ClInclude Include="Mapper231.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper237.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Mapper240.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
