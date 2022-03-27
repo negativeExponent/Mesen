@@ -119,6 +119,7 @@
 #include "Mapper60.h"
 #include "Mapper61.h"
 #include "Mapper62.h"
+#include "Mapper81.h"
 #include "Mapper83.h"
 #include "Mapper91.h"
 #include "Mapper103.h"
@@ -439,6 +440,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 78: return new JalecoJf16();
 		case 79: return new Nina03_06(false);
 		case 80: return new TaitoX1005(false);
+		case 81: return new Mapper81();
 		case 82: return new TaitoX1017();
 		case 83: return new Mapper83();
 		case 85: return new VRC7();
