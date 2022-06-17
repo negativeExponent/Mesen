@@ -871,6 +871,7 @@
     <ClInclude Include="Rambo1.h" />
     <ClInclude Include="Rt01.h" />
     <ClInclude Include="Sachen74LS374N.h" />
+    <ClInclude Include="Sachen3013.h" />
     <ClInclude Include="Sachen8259.h" />
     <ClInclude Include="Sachen_133.h" />
     <ClInclude Include="Sachen_136.h" />

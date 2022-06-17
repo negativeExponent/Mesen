@@ -913,6 +913,9 @@
     <ClInclude Include="Sachen_136.h">
       <Filter>Nes\Mappers\Sachen</Filter>
     </ClInclude>
+    <ClInclude Include="Sachen3013.h">
+      <Filter>Nes\Mappers\Sachen</Filter>
+    </ClInclude>
     <ClInclude Include="UnifLoader.h">
       <Filter>Nes\RomLoader</Filter>
     </ClInclude>

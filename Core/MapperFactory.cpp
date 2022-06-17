@@ -265,6 +265,7 @@
 #include "Sachen_147.h"
 #include "Sachen_148.h"
 #include "Sachen_149.h"
+#include "Sachen3013.h"
 #include "Sachen74LS374N.h"
 #include "Sachen8259.h"
 #include "Sachen9602.h"
@@ -733,6 +734,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 534: return new MMC3_534();
 
 		case 552: return new TaitoX1017();
+		case 553: return new Sachen3013();
 		case 554: return new Kaiser7010();
 
 		case UnifBoards::Ac08: return new Ac08(); //mapper 42?
