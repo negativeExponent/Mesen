@@ -733,6 +733,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 530: return new Ax5705();
 		case 534: return new MMC3_534();
 
+		case 551: return new Waixing178();
 		case 552: return new TaitoX1017();
 		case 553: return new Sachen3013();
 		case 554: return new Kaiser7010();
