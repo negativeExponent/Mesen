@@ -227,6 +227,7 @@
 #include "MMC3_441.h"
 #include "MMC3_444.h"
 #include "MMC3_445.h"
+#include "MMC3_516.h"
 #include "MMC3_534.h"
 #include "MMC3_Bmc411120C.h"
 #include "MMC3_BmcF15.h"
@@ -721,6 +722,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 
 		case 513: return new Sachen9602();
 		//514-517
+		case 516: return new MMC3_516();
 		case 518: return new Dance2000();
 		case 519: return new Eh8813A();
 		//520
