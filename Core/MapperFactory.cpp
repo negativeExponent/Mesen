@@ -55,6 +55,7 @@
 #include "Bs5.h"
 #include "Caltron41.h"
 #include "Cc21.h"
+#include "Ctc15.h"
 #include "Cheapocabra.h"
 #include "CityFighter.h"
 #include "CNROM.h"
@@ -734,6 +735,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 530: return new Ax5705();
 		case 534: return new MMC3_534();
 
+		case 548: return new Ctc15();
 		case 550: return new MMC1_550();
 		case 551: return new Waixing178();
 		case 552: return new TaitoX1017();
