@@ -93,6 +93,7 @@
 #include "JalecoSs88006.h"
 #include "JyCompany.h"
 #include "Kaiser202.h"
+#include "Kaiser7010.h"
 #include "Kaiser7012.h"
 #include "Kaiser7013B.h"
 #include "Kaiser7016.h"
@@ -730,6 +731,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 529: return new T230();
 		case 530: return new Ax5705();
 		case 534: return new MMC3_534();
+
+		case 554: return new Kaiser7010();
 
 		case UnifBoards::Ac08: return new Ac08(); //mapper 42?
 		case UnifBoards::Cc21: return new Cc21();
