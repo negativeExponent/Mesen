@@ -937,6 +937,9 @@
     <ClInclude Include="MMC1_105.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
+    <ClInclude Include="MMC1_550.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
     <ClInclude Include="Waixing162.h">
       <Filter>Nes\Mappers\Waixing</Filter>
     </ClInclude>
