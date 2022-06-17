@@ -165,6 +165,7 @@
 #include "Mapper375.h"
 #include "Mapper380.h"
 #include "Mapper449.h"
+#include "Mapper541.h"
 #include "McAcc.h"
 #include "MMC1.h"
 #include "MMC1_105.h"
@@ -735,6 +736,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 530: return new Ax5705();
 		case 534: return new MMC3_534();
 
+		case 541: return new Mapper541();
 		case 548: return new Ctc15();
 		case 550: return new MMC1_550();
 		case 551: return new Waixing178();
