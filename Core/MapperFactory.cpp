@@ -717,20 +717,19 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 422: return new MMC3_422();
 		case 430: return new MMC3_430();
 		case 432: return new MMC3_432();
+		case 433: return new Mapper433();
 		case 434: return new BmcS2009();
-
+		//
+		case 437: return new Mapper437();
+		case 438: return new Mapper438();
+		//
 		case 441: return new MMC3_441();
 		case 444: return new MMC3_444();
 		case 445: return new MMC3_445();
 		case 449: return new Mapper449();
-
-		case 433: return new Mapper433();
 		//
-		case 437: return new Mapper437();
-		case 438: return new Mapper438();
-		
 		case 453: return new Mapper453();
-
+		//
 		case 513: return new Sachen9602();
 		//514-517
 		case 516: return new MMC3_516();
