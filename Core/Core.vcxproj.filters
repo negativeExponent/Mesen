@@ -979,6 +979,9 @@
     <ClInclude Include="MMC1_105.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
+    <ClInclude Include="MMC1_404.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
     <ClInclude Include="MMC1_550.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
