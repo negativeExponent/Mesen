@@ -51,6 +51,7 @@
 #include "BmcCtc12in1.h"
 #include "UnlKs106C.h"
 #include "BmcResetNromX1n1.h"
+#include "Bmc830752C.h"
 #include "BnRom.h"
 #include "Bs5.h"
 #include "Caltron41.h"
@@ -719,6 +720,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 393: return new MMC3_393();
 		//394
 		case 395: return new MMC3_395();
+		case 396: return new Bmc830752C();
+		//
 		case 399: return new MMC3_399();
 		//396-400
 		case 401: return new MMC3_401();
