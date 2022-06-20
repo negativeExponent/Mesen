@@ -176,6 +176,7 @@
 #include "Mapper416.h"
 #include "Mapper415.h"
 #include "Mapper414.h"
+#include "Mapper409.h"
 #include "McAcc.h"
 #include "MMC1.h"
 #include "MMC1_105.h"
@@ -716,10 +717,12 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 395: return new MMC3_395();
 		//396-400
 		case 401: return new MMC3_401();
+
+		case 409: return new Mapper409();
 		case 410: return new MMC3_410();
 		case 411: return new MMC3_411();
 		case 412: return new MMC3_412();
-
+		//
 		case 414: return new Mapper414();
 		case 415: return new Mapper415();
 		case 416: return new Mapper416();
