@@ -1498,6 +1498,9 @@
     <ClInclude Include="Mapper116.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper359.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Mapper360.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
@@ -1514,6 +1517,9 @@
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
     <ClInclude Include="Mapper449.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapper540.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
     <ClInclude Include="MMC3_208.h">
