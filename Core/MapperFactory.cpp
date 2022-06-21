@@ -164,6 +164,7 @@
 #include "Mapper253.h"
 #include "Mapper319.h"
 #include "Mapper359.h"
+#include "Mapper357.h"
 #include "Mapper360.h"
 #include "Mapper375.h"
 #include "Mapper380.h"
@@ -710,6 +711,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 350: return new Bmc891227();
 		//352:
 		case 353: return new MMC3_353();
+		case 357: return new Mapper357();
 		case 359: return new Mapper359();
 		case 360: return new Mapper360();
 		case 361: return new MMC3_361();
