@@ -163,6 +163,8 @@
 #include "Mapper246.h"
 #include "Mapper253.h"
 #include "Mapper319.h"
+#include "Mapper326.h"
+#include "Mapper330.h"
 #include "Mapper359.h"
 #include "Mapper357.h"
 #include "Mapper360.h"
@@ -687,10 +689,11 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 323: return new FaridSlrom();
 		case 324: return new FaridUnrom();
 		case 325: return new MMC3_MaliSB();
+		case 326: return new Mapper326();
 		case 327: return new Bmc1024CA1();
 		case 328: return new Rt01();
 		case 329: return new Edu2000();
-		//330
+		case 330: return new Mapper330();
 		case 331: return new Bmc12in1();
 		case 332: return new Super40in1Ws();
 		case 333: return new Bmc8in1(); // + NEWSTAR-GRM070-8IN1

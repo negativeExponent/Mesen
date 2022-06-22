@@ -1498,6 +1498,12 @@
     <ClInclude Include="Mapper116.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper326.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapper330.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Mapper357.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
