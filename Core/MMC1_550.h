@@ -10,7 +10,8 @@ private:
 protected:
 	void InitMapper() override
 	{
-		_selectedBlock, _latch = 0;
+		_latch = 0;
+		_selectedBlock = 0;
 		MMC1::InitMapper();
 		AddRegisterRange(0x7000, 0x7FFF, MemoryOperation::Write);
 	}

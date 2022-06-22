@@ -21,7 +21,7 @@ protected:
 		WriteRegister(0x8000, 0);
 	}
 
-	void Reset(bool softReset)
+	void Reset(bool softReset) override
 	{
 		WriteRegister(0x5000, 0);
 		WriteRegister(0x8000, 0);
@@ -30,7 +30,7 @@ protected:
 	void UpdateState()
 	{
 		SelectCHRPage(0, 0);
-		SelectPRGPage(0, _regs[0] << 3 | _regs[1] & 0x07);
+		SelectPRGPage(0, _regs[0] << 3 | (_regs[1] & 0x07));
 		SelectPRGPage(1, _regs[0] << 3 | 0x07);
 		SetMirroringType((_regs[0] & 0x08) ? MirroringType::Horizontal : MirroringType::Vertical);
 	}

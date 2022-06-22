@@ -23,8 +23,8 @@ private:
 	uint8_t _dipswitch;
 
 protected:
-	uint16_t RegisterStartAddress() { return 0x4020; }
-	uint16_t RegisterEndAddress() { return 0xFFFF; }
+	uint16_t RegisterStartAddress() override { return 0x4020; }
+	uint16_t RegisterEndAddress() override { return 0xFFFF; }
 
 	uint16_t GetPRGPageSize() override { return 0x2000; }
 	uint16_t GetCHRPageSize() override { return 0x2000; }

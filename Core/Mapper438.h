@@ -15,7 +15,7 @@ protected:
 		WriteRegister(0x8000, 0);
 	}
 
-	void Reset(bool softReset)
+	void Reset(bool softReset) override
 	{
 		WriteRegister(0x8000, 0);
 	}

@@ -96,7 +96,7 @@ protected:
 		SelectPRGPage(0, _outerPrgBank | (_prgBanks[0] & _prgMask));
 		SelectPRGPage(1, _outerPrgBank | (_prgBanks[1] & _prgMask));
 		SelectPRGPage(2, _outerPrgBank | (_prgBanks[2] & _prgMask));
-		SelectPRGPage(3, _outerPrgBank | (-1) & _prgMask);
+		SelectPRGPage(3, _outerPrgBank | ((-1) & _prgMask));
 
 		SetCpuMemoryMapping(0x6000, 0x7FFF, _outerPrgBank | (_prgBanks[3] & _prgMask), PrgMemoryType::PrgRom);
 	}
