@@ -436,7 +436,18 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 39: return new Mapper39();
 		case 40: return new Mapper40();
 		case 41: return new Caltron41();
-		case 42: return new Mapper42();
+		case 42:
+			// Green Beret (LH09) FDS Conversion in NES 2.0/ iNES 1.0 header
+			// Actually UNIF AC-08 roms
+			if(romData.Info.SubMapperID == 2) {
+				return new Ac08();
+			}
+			if((romData.ChrRom.size() == 0) && (
+				(romData.PrgRom.size() == (160 * 1024)) ||
+				(romData.PrgRom.size() == (256 * 1024)))) {
+				return new Ac08();	
+			}
+			return new Mapper42();
 		case 43: return new Mapper43();
 		case 44: return new MMC3_44();
 		case 45: return new MMC3_45();
