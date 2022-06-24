@@ -919,6 +919,9 @@
     <ClInclude Include="Mapper127.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper128.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Mapper244.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
