@@ -199,6 +199,7 @@
 #include "MMC1.h"
 #include "MMC1_105.h"
 #include "MMC1_155.h"
+#include "MMC1_297.h"
 #include "MMC1_404.h"
 #include "MMC1_550.h"
 #include "MMC2.h"
@@ -681,7 +682,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 292: return new DragonFighter();
 		//293-294
 		case 295: break; //13IN1JY110
-		//296-297
+		//296-296
+		case 297: return new MMC1_297();
 		case 298: return new Tf1201();
 		case 299: return new Bmc11160();
 		case 300: return new Bmc190in1();
