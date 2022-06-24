@@ -164,6 +164,7 @@
 #include "Mapper244.h"
 #include "Mapper246.h"
 #include "Mapper253.h"
+#include "Mapper271.h"
 #include "Mapper319.h"
 #include "Mapper326.h"
 #include "Mapper330.h"
@@ -664,7 +665,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 			}
 			return new MMC3_Coolboy();
 		//269-270
-		case 271: break; //22026
+		case 271: return new Mapper271();
 		//272-273
 		case 274: return new Bmc80013B();
 		//275-282
