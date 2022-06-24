@@ -132,6 +132,7 @@
 #include "Mapper116.h"
 #include "Mapper117.h"
 #include "Mapper120.h"
+#include "Mapper127.h"
 #include "Mapper170.h"
 #include "Mapper174.h"
 #include "Mapper183.h"
@@ -524,6 +525,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 123: return new MMC3_123();
 		case 125: return new Lh32();
 		case 126: return new MMC3_126();
+		case 127: return new Mapper127();
 		case 132: return new Txc22211A();
 		case 133: return new Sachen_133();
 		case 134: return new MMC3_134();
