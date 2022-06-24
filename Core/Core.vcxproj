@@ -818,6 +818,7 @@
     <ClInclude Include="MMC3_250.h" />
     <ClInclude Include="MMC3_254.h" />
     <ClInclude Include="MMC3_267.h" />
+    <ClInclude Include="MMC3_291.h" />
     <ClInclude Include="MMC3_45.h" />
     <ClInclude Include="MMC3_334.h" />
     <ClInclude Include="MMC3_353.h" />

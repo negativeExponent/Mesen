@@ -1015,6 +1015,9 @@
     <ClInclude Include="MMC3_219.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
+    <ClInclude Include="MMC3_291.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
     <ClInclude Include="AutoSaveManager.h">
       <Filter>Misc</Filter>
     </ClInclude>

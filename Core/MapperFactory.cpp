@@ -237,6 +237,7 @@
 #include "MMC3_250.h"
 #include "MMC3_254.h"
 #include "MMC3_267.h"
+#include "MMC3_291.h"
 #include "MMC3_334.h"
 #include "MMC3_353.h"
 #include "MMC3_361.h"
@@ -678,7 +679,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 288: return new Gkcx1();
 		case 289: return new Bmc60311C();
 		case 290: return new BmcNtd03();
-		//291
+		case 291: return new MMC3_291();
 		case 292: return new DragonFighter();
 		//293-294
 		case 295: break; //13IN1JY110
