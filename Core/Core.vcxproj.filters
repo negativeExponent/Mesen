@@ -1600,6 +1600,9 @@
     <ClInclude Include="MMC3_364.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
+    <ClInclude Include="MMC3_369.h">
+      <Filter>Nes\Mappers\MMC</Filter>
+    </ClInclude>
     <ClInclude Include="MMC3_370.h">
       <Filter>Nes\Mappers\MMC</Filter>
     </ClInclude>
