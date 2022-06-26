@@ -796,8 +796,11 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 441: return new MMC3_441();
 		case 444: return new MMC3_444();
 		case 445: return new MMC3_445();
+		case 447: return new VRC2_4();
+		case 448: return new VRC2_4();
 		case 449: return new Mapper449();
-		//
+		case 450: return new VRC2_4();
+		// 451
 		case 452: return new Mapper452();
 		case 453: return new Mapper453();
 		//
