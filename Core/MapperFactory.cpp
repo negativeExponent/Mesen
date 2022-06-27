@@ -283,6 +283,7 @@
 #include "Namco108_88.h"
 #include "Namco108_95.h"
 #include "Namco108_154.h"
+#include "Namco108_557.h"
 #include "Namco163.h"
 #include "Nanjing.h"
 #include "Nina01.h"
@@ -833,6 +834,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 553: return new Sachen3013();
 		case 554: return new Kaiser7010();
 		case 556: return new Mapper556();
+		case 557: return new Namco108_557();
 
 		case UnifBoards::Ac08: return new Ac08(); //mapper 42?
 		case UnifBoards::Cc21: return new Cc21();

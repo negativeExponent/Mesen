@@ -924,6 +924,7 @@
     <ClInclude Include="Namco108_76.h" />
     <ClInclude Include="Namco108_88.h" />
     <ClInclude Include="Namco108_95.h" />
+    <ClInclude Include="Namco108_557.h" />
     <ClInclude Include="NtscFilter.h" />
     <ClInclude Include="Sachen_145.h" />
     <ClInclude Include="CodeDataLogger.h" />
