@@ -239,6 +239,7 @@
 #include "MMC3_250.h"
 #include "MMC3_254.h"
 #include "MMC3_267.h"
+#include "MMC3_269.h"
 #include "MMC3_291.h"
 #include "MMC3_334.h"
 #include "MMC3_353.h"
@@ -675,6 +676,17 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 				romData.Info.SubMapperID = 1;
 			}
 			return new MMC3_Coolboy();
+		case 269:
+			if(romData.ChrRom.size() == 0) {
+				for(uint32_t i = 0; i < romData.PrgRom.size(); i++) {
+					// Decrypt CHR pattern
+					uint8_t value = romData.PrgRom.data()[i];
+					value = ((value & 1) << 6) | ((value & 2) << 3) | ((value & 4) << 0) | ((value & 8) >> 3) |
+							((value & 16) >> 3) | ((value & 32) >> 2) | ((value & 64) >> 1) | ((value & 128) << 0);
+					romData.ChrRom.insert(romData.ChrRom.end(), 1, value);
+				}
+			}
+			return new MMC3_269();
 		//269-270
 		case 271: return new Mapper271();
 		//272-273
