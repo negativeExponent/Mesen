@@ -472,6 +472,9 @@
     <ClInclude Include="Namco108_154.h">
       <Filter>Nes\Mappers\Namco</Filter>
     </ClInclude>
+    <ClInclude Include="Namco108_418.h">
+      <Filter>Nes\Mappers\Namco</Filter>
+    </ClInclude>
     <ClInclude Include="Namco108_557.h">
       <Filter>Nes\Mappers\Namco</Filter>
     </ClInclude>
