@@ -285,6 +285,7 @@
 #include "Namco108_88.h"
 #include "Namco108_95.h"
 #include "Namco108_154.h"
+#include "Namco108_418.h"
 #include "Namco108_557.h"
 #include "Namco163.h"
 #include "Nanjing.h"
@@ -803,7 +804,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 415: return new Mapper415();
 		case 416: return new Mapper416();
 		case 417: return new Mapper417();
-		//418-21
+		case 418: return new Namco108_418();
+		//419-21
 		case 422: return new MMC3_422();
 		//423-428
 		case 429: return new Mapper429();
