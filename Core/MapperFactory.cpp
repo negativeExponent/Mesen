@@ -74,6 +74,7 @@
 #include "FaridUnrom.h"
 #include "FDS.h"
 #include "Fk23C.h"
+#include "Mapper523.h"
 #include "FrontFareast.h"
 #include "Ghostbusters63in1.h"
 #include "Gkcx1.h"
@@ -839,7 +840,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		//520
 		case 521: return new DreamTech01();
 		case 522: return new Lh10();
-		//523
+		case 523: return new Mapper523();
 		case 524: return new VRC2_4();
 		case 525: return new VRC2_4();
 		case 526: return new UnlBj56();
