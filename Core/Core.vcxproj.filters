@@ -1561,6 +1561,9 @@
     <ClInclude Include="Mapper452.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper523.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Mapper538.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
@@ -1721,6 +1724,9 @@
       <Filter>Rewinder</Filter>
     </ClInclude>
     <ClInclude Include="Fk23C.h">
+      <Filter>Nes\Mappers\Unif</Filter>
+    </ClInclude>
+    <ClInclude Include="WaixingFS005.h">
       <Filter>Nes\Mappers\Unif</Filter>
     </ClInclude>
     <ClInclude Include="StereoCombFilter.h">

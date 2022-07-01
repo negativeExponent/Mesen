@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "BaseMapper.h"
+#include "CPU.h"
+#include "A12Watcher.h"
 
 class Fk23C : public BaseMapper
 {
@@ -41,16 +43,16 @@ private:
 	A12Watcher _a12Watcher;
 
 protected:
-	uint16_t GetPRGPageSize() override { return 0x2000; }
-	uint16_t GetCHRPageSize() override { return 0x0400; }
+	virtual uint16_t GetPRGPageSize() override { return 0x2000; }
+	virtual uint16_t GetCHRPageSize() override { return 0x0400; }
 
-	uint32_t GetChrRamSize() override { return 0x40000; } //Some games have up to 256kb of CHR RAM (only used for iNES 1.0 files w/ no DB entry)
-	uint16_t GetChrRamPageSize() override { return 0x400; }
+	virtual uint32_t GetChrRamSize() override { return 0x40000; } //Some games have up to 256kb of CHR RAM (only used for iNES 1.0 files w/ no DB entry)
+	virtual uint16_t GetChrRamPageSize() override { return 0x400; }
 
-	uint32_t GetWorkRamSize() override { return 0x8000; } //Somes games have up to 32kb of Work RAM (only used for iNES 1.0 files w/ no DB entry)
-	uint32_t GetWorkRamPageSize() override { return 0x2000; }
+	virtual uint32_t GetWorkRamSize() override { return 0x8000; } //Somes games have up to 32kb of Work RAM (only used for iNES 1.0 files w/ no DB entry)
+	virtual uint32_t GetWorkRamPageSize() override { return 0x2000; }
 
-	void InitMapper() override
+	virtual void InitMapper() override
 	{
 		//$5000
 		_prgBankingMode = 0;
@@ -107,7 +109,7 @@ protected:
 		UpdateState();
 	}
 
-	void Reset(bool softReset) override
+	virtual void Reset(bool softReset) override
 	{
 		if(softReset) {
 			if(_wramConfigEnabled && _selectChrRam && HasBattery()) {
@@ -117,7 +119,7 @@ protected:
 		}
 	}
 
-	void StreamState(bool saving) override
+	virtual void StreamState(bool saving) override
 	{
 		SnapshotInfo a12Watcher { &_a12Watcher };
 		ArrayInfo<uint8_t> regs { _mmc3Registers, 12 };
@@ -134,13 +136,13 @@ protected:
 		}
 	}
 
-	void SelectCHRPage(uint16_t slot, uint16_t page, ChrMemoryType memoryType = ChrMemoryType::Default) override
+	virtual void SelectCHRPage(uint16_t slot, uint16_t page, ChrMemoryType memoryType = ChrMemoryType::Default) override
 	{
 		bool useChrRam = !HasChrRom() || (_selectChrRam && _chrRamSize > 0) || (_wramConfigEnabled && _ramInFirstChrBank && page <= 7);
 		BaseMapper::SelectCHRPage(slot, page, useChrRam ? ChrMemoryType::ChrRam : ChrMemoryType::ChrRom);
 	}
 
-	void UpdatePrg()
+	virtual void UpdatePrg()
 	{
 		switch(_prgBankingMode) {
 			case 0:
@@ -191,7 +193,7 @@ protected:
 		}
 	}
 
-	void UpdateChr()
+	virtual void UpdateChr()
 	{
 		if(!_mmc3ChrMode) {
 			uint16_t innerMask = _cnromChrMode ? (_outerChrBankSize ? 1 : 3) : 0;
@@ -226,7 +228,7 @@ protected:
 		}
 	}
 
-	void UpdateState()
+	virtual void UpdateMirroring()
 	{
 		switch(_mirroringReg & (_allowSingleScreenMirroring ? 0x03 : 0x01)) {
 			case 0: SetMirroringType(MirroringType::Vertical); break;
@@ -234,7 +236,11 @@ protected:
 			case 2: SetMirroringType(MirroringType::ScreenAOnly); break;
 			case 3: SetMirroringType(MirroringType::ScreenBOnly); break;
 		}
+	}
 
+	virtual void UpdateState()
+	{
+		UpdateMirroring();
 		UpdatePrg();
 		UpdateChr();
 
@@ -252,7 +258,7 @@ protected:
 		};
 	}
 
-	void WriteRegister(uint16_t addr, uint8_t value) override
+	virtual void WriteRegister(uint16_t addr, uint8_t value) override
 	{
 		if(addr < 0x8000) {
 			if(((addr >= 0x5000) && (addr <= 0x5FFF)) &&
