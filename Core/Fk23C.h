@@ -46,7 +46,21 @@ protected:
 	virtual uint16_t GetPRGPageSize() override { return 0x2000; }
 	virtual uint16_t GetCHRPageSize() override { return 0x0400; }
 
-	virtual uint32_t GetChrRamSize() override { return 0x40000; } //Some games have up to 256kb of CHR RAM (only used for iNES 1.0 files w/ no DB entry)
+	virtual uint32_t GetChrRamSize() override {
+		if(!_romInfo.IsNes20Header && !_romInfo.IsInDatabase) {
+			if(HasChrRom()) {
+				// Rockman I-VI uses mixed chr rom/ram
+				if((_prgSize == 2048 * 1024) && (_chrRomSize == 512 * 1024)) {
+					return 0x2000;
+				} else {
+					return 0;
+				}
+			}
+		}
+		
+		return 0x40000; // Some games have up to 256kb of CHR RAM (only used for iNES 1.0 files w/ no DB entry)
+	}
+
 	virtual uint16_t GetChrRamPageSize() override { return 0x400; }
 
 	virtual uint32_t GetWorkRamSize() override { return 0x8000; } //Somes games have up to 32kb of Work RAM (only used for iNES 1.0 files w/ no DB entry)
@@ -54,6 +68,20 @@ protected:
 
 	virtual void InitMapper() override
 	{
+		if(!_romInfo.IsNes20Header && !_romInfo.IsInDatabase) {
+			if(!HasChrRom()) {
+				if(_prgSize >= 8192 * 1024) { // 120-in-1 (Unl)[U].unif
+					_romInfo.SubMapperID = 2;
+				}
+			} else {
+				if((_prgSize == 1024 *1024) && (_chrRomSize == _prgSize)) { // 4-in-1 (FK23C8078) (Ch) [p1][U][!].unf
+					_romInfo.SubMapperID = 1;
+				} else if((_prgSize >= 128 * 1024) && (_chrRomSize == 64 * 1024)) { // 126-in-1 (5-in-1, 16-in-1, 22-in-1, 42-in-1, 56-in-1, 62-in-1) [p1][U][!].unf
+					_romInfo.SubMapperID = 1;
+				}
+			}
+		}
+
 		//$5000
 		_prgBankingMode = 0;
 		_outerChrBankSize = 0;
