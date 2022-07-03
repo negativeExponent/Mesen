@@ -194,6 +194,7 @@
 #include "Mapper403.h"
 #include "Mapper402.h"
 #include "Mapper452.h"
+#include "Mapper533.h"
 #include "Mapper535.h"
 #include "Mapper538.h"
 #include "Mapper539.h"
@@ -850,6 +851,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 528: return new Unl831128C();
 		case 529: return new T230();
 		case 530: return new Ax5705();
+		case 533: return new Mapper533();
 		case 534: return new MMC3_534();
 		case 535: return new Mapper535();
 		case 538: return new Mapper538();
