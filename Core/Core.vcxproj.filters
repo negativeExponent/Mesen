@@ -1570,6 +1570,9 @@
     <ClInclude Include="Mapper538.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper539.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Mapper540.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
