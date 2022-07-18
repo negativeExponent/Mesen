@@ -38,6 +38,7 @@
 #include "Bmc830425C4391T.h"
 #include "Bmc891227.h"
 #include "Bmc8in1.h"
+#include "BmcDs07.h"
 #include "BmcK3036.h"
 #include "BmcG146.h"
 #include "BmcGn45.h"
@@ -822,6 +823,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		//435-436
 		case 437: return new Mapper437();
 		case 438: return new Mapper438();
+		case 439: return new BmcDs07();
 		//439-440
 		case 441: return new MMC3_441();
 		//442-443
