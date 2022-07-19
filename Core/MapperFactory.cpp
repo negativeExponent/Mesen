@@ -265,6 +265,7 @@
 #include "MMC3_410.h"
 #include "MMC3_411.h"
 #include "MMC3_412.h"
+#include "MMC3_420.h"
 #include "MMC3_422.h"
 #include "MMC3_430.h"
 #include "MMC3_432.h"
@@ -812,6 +813,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 416: return new Mapper416();
 		case 417: return new Mapper417();
 		case 418: return new Namco108_418();
+		case 420: return new MMC3_420();
 		//419-21
 		case 422: return new MMC3_422();
 		//423-428
