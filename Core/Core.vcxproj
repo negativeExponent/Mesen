@@ -810,6 +810,7 @@
     <ClInclude Include="Mapper540.h" />
     <ClInclude Include="Mapper549.h" />
     <ClInclude Include="Mapper556.h" />
+    <ClInclude Include="Mapper559.h" />
     <ClInclude Include="MMC1_155.h" />
     <ClInclude Include="MMC1_297.h" />
     <ClInclude Include="MMC3_114.h" />
