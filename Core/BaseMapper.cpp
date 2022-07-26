@@ -630,6 +630,12 @@ void BaseMapper::Initialize(RomData &romData)
 		}
 	}
 
+	if(romData.Info.MiscRoms) {
+		_miscRomSize = (uint32_t)romData.MiscRomsData.size();
+		_miscRom = new uint8_t[_miscRomSize];
+		memcpy(_miscRom, romData.MiscRomsData.data(), _miscRomSize);
+	}
+
 	SetupDefaultWorkRam();
 
 	SetMirroringType(romData.Info.Mirroring);
@@ -651,6 +657,7 @@ BaseMapper::~BaseMapper()
 	delete[] _saveRam;
 	delete[] _workRam;
 	delete[] _nametableRam;
+	delete[] _miscRom;
 }
 
 void BaseMapper::GetMemoryRanges(MemoryRanges &ranges)
