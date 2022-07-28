@@ -802,7 +802,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 383: return new MMC3_383();
 		//384
 		case 385: return new Mapper385();
-		//386-388
+		case 386: return new JyCompany();
+		//387-388
 		case 389: return new Mapper389();
 		//390 - is but m236
 		case 391: return new MMC3_391();
