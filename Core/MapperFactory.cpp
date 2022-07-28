@@ -216,6 +216,7 @@
 #include "MMC1_111.h"
 #include "MMC1_155.h"
 #include "MMC1_297.h"
+#include "MMC1_374.h"
 #include "MMC1_404.h"
 #include "MMC1_550.h"
 #include "MMC2.h"
@@ -794,6 +795,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 369: return new MMC3_369();
 		case 370: return new MMC3_370();
 		case 372: return new MMC3_372();
+		case 374: return new MMC1_374();
 		case 375: return new Mapper375();
 		case 376: return new MMC3_376();
 		case 377: return new MMC3_377();
