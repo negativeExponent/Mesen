@@ -713,6 +713,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		//272-273
 		case 274: return new Bmc80013B();
 		//275-282
+		case 281: return new JyCompany();
+		case 282: return new JyCompany();
 		case 283: return new Gs2004_Gs2013();
 		case 284: return new UnlDripGame();
 		case 285: return new A65AS();
