@@ -838,7 +838,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 417: return new Mapper417();
 		case 418: return new Namco108_418();
 		case 420: return new MMC3_420();
-		//419-21
+		case 421: return new JyCompany();
 		case 422: return new MMC3_422();
 		//423-428
 		case 428: return new Mapper428();

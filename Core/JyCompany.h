@@ -193,6 +193,16 @@ protected:
 				prgMask = 0x1F;
 				prgBase = (_outerBank & 0x06) << 4;
 				break;
+			
+			case 421:
+				if(_outerBank & 0x04) {
+					prgMask = 0x3F;
+					prgBase = (_outerBank & 0x0C) << 4;
+				} else {
+					prgMask = 0x1F;
+					prgBase = (_outerBank & 0x0E) << 4;
+				}
+				break;
 
 			default: // Mapper 35/90/209/211
 				prgMask = 0x3F;
@@ -275,6 +285,11 @@ protected:
 					(*mask) = 0x0FF;
 					(*base) = (_outerBank & 0x03) << 8;
 				}
+				break;
+
+			case 421:
+				(*mask) = 0x1FF;
+				(*base) = (_outerBank & 0x03) << 8;
 				break;
 
 			default: // Mapper 35/90/209/211/282
