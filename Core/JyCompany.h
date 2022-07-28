@@ -158,6 +158,16 @@ protected:
 		uint8_t prgBase = 0;
 
 		switch(_romInfo.MapperID) {
+			case 281:
+				prgMask = 0x1F;
+				prgBase = (_outerBank & 0x03) << 5;
+				break;
+			
+			case 282:
+				prgMask = 0x1F;
+				prgBase = (_outerBank << 4) & ~prgMask;
+				break;
+
 			default: // Mapper 35/90/209/211
 				prgMask = 0x3F;
 				prgBase = (_outerBank << 5) & ~prgMask;
@@ -208,7 +218,12 @@ protected:
 	void GetChrSetup(uint16_t *mask, uint16_t *base)
 	{
 		switch(_romInfo.MapperID) {
-			default: // Mapper 35/90/209/211
+			case 281:
+				(*mask) = 0xFF;
+				(*base) = (_outerBank & 0x03) << 8;
+				break;
+
+			default: // Mapper 35/90/209/211/282
 				if(_outerBank & 0x20) {
 					(*mask) = 0x1FF;
 					(*base) = (_outerBank & 0x18) << 6;
