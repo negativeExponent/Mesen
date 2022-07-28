@@ -726,7 +726,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 291: return new MMC3_291();
 		case 292: return new DragonFighter();
 		//293-294
-		case 295: break; //13IN1JY110
+		case 295: return new JyCompany();
 		//296-296
 		case 297: return new MMC1_297();
 		case 298: return new Tf1201();
