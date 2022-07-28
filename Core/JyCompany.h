@@ -168,6 +168,11 @@ protected:
 				prgBase = (_outerBank << 4) & ~prgMask;
 				break;
 
+			case 295:
+				prgMask = 0x0F;
+				prgBase = (_outerBank & 0x07) << 4;
+				break;
+
 			default: // Mapper 35/90/209/211
 				prgMask = 0x3F;
 				prgBase = (_outerBank << 5) & ~prgMask;
@@ -221,6 +226,11 @@ protected:
 			case 281:
 				(*mask) = 0xFF;
 				(*base) = (_outerBank & 0x03) << 8;
+				break;
+			
+			case 295:
+				(*mask) = 0x7F;
+				(*base) = (_outerBank & 0x07) << 7;
 				break;
 
 			default: // Mapper 35/90/209/211/282
