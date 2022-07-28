@@ -110,7 +110,7 @@ protected:
 		_accumulator = 0;
 		_regRamValue = 0;
 
-		if(_romInfo.MapperID == 90) {
+		if(_romInfo.MapperID == 90 || _romInfo.MapperID == 388) {
 			_inhibitExtendedMirroring = true;
 		}
 
@@ -183,6 +183,11 @@ protected:
 				prgMask = 0x0F;
 				prgBase = (((_outerBank & 0x02) >> 1) | ((_outerBank & 0x08) >> 2)) << 4;
 				break;
+			
+			case 388:
+				prgMask = 0x1F;
+				prgBase = (_outerBank & 0x0C) << 3;
+				break;
 
 			default: // Mapper 35/90/209/211
 				prgMask = 0x3F;
@@ -250,9 +255,19 @@ protected:
 				if(_outerBank & 0x20) {
 					(*mask) = 0x1FF;
 					(*base) = (_outerBank & 0x04) << 7;
-				} else  {
+				} else {
 					(*mask) = 0x0FF;
 					(*base) = (((_outerBank & 0x04) >> 1) | (_outerBank & 0x01)) << 8;
+				}
+				break;
+			
+			case 388:
+				if(_outerBank & 0x20) {
+					(*mask) = 0x1FF;
+					(*base) = (_outerBank & 0x02) << 8;
+				} else {
+					(*mask) = 0x0FF;
+					(*base) = (_outerBank & 0x03) << 8;
 				}
 				break;
 
