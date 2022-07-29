@@ -415,7 +415,7 @@ protected:
 				case 0xC006: _irqXorReg = value; break;
 				case 0xC007: _irqFunkyModeReg = value; break;
 			}
-		// these registers extend only through addressing ranges $x000 - $x7FFF
+		// these registers extend only through addressing ranges $x000 - $x7FF
 		} else if ((addr >= 0x9000) && (addr < 0xC000)) {
 			switch(addr & 0xF807) {
 				case 0x9000: case 0x9001: case 0x9002: case 0x9003:
