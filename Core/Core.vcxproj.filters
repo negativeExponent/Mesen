@@ -982,6 +982,9 @@
     <ClInclude Include="Mapper272.h">
       <Filter>Nes\Mappers\Unnamed</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper277.h">
+      <Filter>Nes\Mappers\Unnamed</Filter>
+    </ClInclude>
     <ClInclude Include="Sachen_136.h">
       <Filter>Nes\Mappers\Sachen</Filter>
     </ClInclude>
