@@ -770,6 +770,7 @@
     <ClInclude Include="Mapper183.h" />
     <ClInclude Include="Mapper253.h" />
     <ClInclude Include="Mapper271.h" />
+    <ClInclude Include="Mapper272.h" />
     <ClInclude Include="Mapper541.h" />
     <ClInclude Include="Mapper43.h" />
     <ClInclude Include="Mapper83.h" />
