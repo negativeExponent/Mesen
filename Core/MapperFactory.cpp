@@ -77,7 +77,6 @@
 #include "Fk23C.h"
 #include "Mapper523.h"
 #include "FrontFareast.h"
-#include "Ghostbusters63in1.h"
 #include "Gkcx1.h"
 #include "GoldenFive.h"
 #include "Gs2004_Gs2013.h"
@@ -917,7 +916,6 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 
 		case UnifBoards::Ac08: return new Ac08(); //mapper 42?
 		case UnifBoards::Cc21: return new Cc21();
-		case UnifBoards::Ghostbusters63in1: return new Ghostbusters63in1(); //mapper 226?
 		case UnifBoards::SssNrom256: return new FamicomBox();
 		case UnifBoards::Unl255in1: return new Unl255in1();
 		case UnifBoards::Unl8237A: return new Unl8237A(); //mapper 215.1
