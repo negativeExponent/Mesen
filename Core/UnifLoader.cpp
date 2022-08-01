@@ -10,7 +10,7 @@ std::unordered_map<string, int> UnifLoader::_boardMappings = std::unordered_map<
 	{ "255in1", UnifBoards::Unl255in1 }, //Doesn't actually exist as a UNIF file (used to assign a mapper to the 255-in-1 rom)
 	{ "3D-BLOCK", UnifBoards::UnknownBoard },
 	{ "411120-C", 287 },
-	{ "42in1ResetSwitch", 226 },
+	{ "42in1ResetSwitch", 233 },
 	{ "43272", 227 },
 	{ "603-5052", 238 },
 	{ "64in1NoRepeat", 314 },
@@ -51,7 +51,7 @@ std::unordered_map<string, int> UnifLoader::_boardMappings = std::unordered_map<
 	{ "GK-192", 58 },
 	{ "GS-2004", 283 },
 	{ "GS-2013", 283 },
-	{ "Ghostbusters63in1", UnifBoards::Ghostbusters63in1 },
+	{ "Ghostbusters63in1", 226 },
 	{ "H2288", 123 },
 	{ "HKROM", 4 },
 	{ "KOF97", 263 },
