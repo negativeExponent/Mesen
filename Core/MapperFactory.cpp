@@ -84,7 +84,6 @@
 #include "GxRom.h"
 #include "Henggedianzi177.h"
 #include "Henggedianzi179.h"
-#include "Hp898f.h"
 #include "IremG101.h"
 #include "IremH3001.h"
 #include "IremLrog017.h"
@@ -925,7 +924,6 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case UnifBoards::UnlPuzzle: return new UnlPuzzle();
 		case UnifBoards::Ks106C: return new UnlKs106C(); //mapper 352, sub 1
 		case UnifBoards::ResetNromX1n1: return new BmcResetNromX1n1(); //352
-		case UnifBoards::Hp898f: return new Hp898f(); // Mapper 319 with the differentt bank order, specific for UNIF dump of Prima Soft 9999999-in-1
 
 		case MapperFactory::StudyBoxMapperID: return new StudyBox();
 		case MapperFactory::NsfMapperID: return new NsfMapper();
