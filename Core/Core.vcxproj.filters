@@ -760,6 +760,9 @@
     <ClInclude Include="Kaiser7010.h">
       <Filter>Nes\Mappers\Kaiser</Filter>
     </ClInclude>
+    <ClInclude Include="Kaiser7030.h">
+      <Filter>Nes\Mappers\Kaiser</Filter>
+    </ClInclude>
     <ClInclude Include="Henggedianzi177.h">
       <Filter>Nes\Mappers</Filter>
     </ClInclude>

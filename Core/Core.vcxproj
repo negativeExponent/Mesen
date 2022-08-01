@@ -729,6 +729,7 @@
     <ClInclude Include="Kaiser7012.h" />
     <ClInclude Include="Kaiser7013B.h" />
     <ClInclude Include="Kaiser7022.h" />
+    <ClInclude Include="Kaiser7030.h" />
     <ClInclude Include="Kaiser7037.h" />
     <ClInclude Include="Kaiser7057.h" />
     <ClInclude Include="Kaiser7058.h" />
