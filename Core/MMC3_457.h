@@ -28,13 +28,14 @@ protected:
 
 	void SelectCHRPage(uint16_t slot, uint16_t page, ChrMemoryType memoryType = ChrMemoryType::Default) override
 	{
-		uint8_t mask = 0xFF >> !(_outerBank & 0x08);
+		uint8_t mask = (_outerBank & 0x08) ? 0xFF : 0x7F;
 		MMC3::SelectCHRPage(slot, ((_outerBank << 7) & ~mask) | (page & mask));
 	}
 
 	void SelectPRGPage(uint16_t slot, uint16_t page, PrgMemoryType memoryType = PrgMemoryType::PrgRom) override
 	{
-		uint8_t mask = 0x1F >> !(_outerBank & 0x08);
+		uint8_t mask = (_outerBank & 0x08) ? 0x1F : 0x0F;
+		printf("_outerBank:%x ~_outerBank:%0x\n", _outerBank, ~_outerBank);
 		MMC3::SelectPRGPage(slot, ((_outerBank << 4) & ~mask) | (page & mask));
 	}
 
