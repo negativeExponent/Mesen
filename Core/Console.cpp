@@ -568,9 +568,9 @@ uint32_t Console::GetFrameCount()
 	return _ppu ? _ppu->GetFrameCount() : 0;
 }
 
-bool Console::IsDotBypassed()
+uint8_t Console::GetStartingPhase()
 {
-	return _ppu ? _ppu->IsDotBypassed() : false;
+	return _ppu ? _ppu->GetStartingPhase() : 0;
 }
 
 NesModel Console::GetModel()

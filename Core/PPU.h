@@ -110,7 +110,7 @@ class PPU : public IMemoryHandler, public Snapshotable
 		bool _corruptOamRow[32];
 
 		// https://forums.nesdev.org/viewtopic.php?p=30625#p30625
-		bool _isDotBypassed;
+		uint8_t _startingPhase;
 
 		void UpdateStatusFlag();
 
@@ -220,9 +220,9 @@ class PPU : public IMemoryHandler, public Snapshotable
 			return _frameCount;
 		}
 
-		bool IsDotBypassed()
+		uint8_t GetStartingPhase()
 		{
-			return _isDotBypassed;
+			return _startingPhase;
 		}
 
 		uint32_t GetFrameCycle()

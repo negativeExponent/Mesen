@@ -105,7 +105,7 @@ void PPU::Reset()
 	memset(_oamDecayCycles, 0, sizeof(_oamDecayCycles));
 	_enableOamDecay = _settings->CheckFlag(EmulationFlags::EnableOamDecay);
 
-	_isDotBypassed = false;
+	_startingPhase = 0;
 
 	UpdateMinimumDrawCycles();
 }
@@ -999,21 +999,13 @@ void PPU::ProcessScanline()
 			LoadTileInfo();
 		}
 	} else if(_cycle == 337 || _cycle == 339) {
-		if(_scanline == -1 && _cycle == 339 && (_frameCount & 0x01) && _nesModel == NesModel::NTSC && _settings->GetPpuModel() == PpuModel::Ppu2C02) {
-			if (IsRenderingEnabled()) {
-			//This behavior is NTSC-specific - PAL frames are always the same number of cycles
-			//"With rendering enabled, each odd PPU frame is one PPU clock shorter than normal" (skip from 339 to 0, going over 340)
-				_cycle = 340;
-				_isDotBypassed = false;
-			}
-			else {
-				// "By keeping rendering disabled until after the time when the clock is skipped on odd frames,
-				// you can get a different color dot crawl pattern than normal."
-				_isDotBypassed = true;
-			}
-		}
 		if (IsRenderingEnabled()) {
 			ReadVram(GetNameTableAddr());
+			if (_scanline == -1 && _cycle == 339 && (_frameCount & 0x01) && _nesModel == NesModel::NTSC && _settings->GetPpuModel() == PpuModel::Ppu2C02) {
+				//This behavior is NTSC-specific - PAL frames are always the same number of cycles
+				//"With rendering enabled, each odd PPU frame is one PPU clock shorter than normal" (skip from 339 to 0, going over 340)
+				_cycle = 340;
+			}
 		}
 	}
 }
@@ -1350,6 +1342,8 @@ void PPU::Exec()
 			}
 		}
 	}
+
+	_startingPhase = _cycle % 3;
 
 	if(_needStateUpdate) {
 		UpdateState();

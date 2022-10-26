@@ -15,8 +15,6 @@ private:
 	SimpleLock _frameLock;
 	OverscanDimensions _overscan;
 	bool _isOddFrame;
-	// https://forums.nesdev.org/viewtopic.php?p=30625#p30625
-	uint8_t _fieldPhase;
 
 	void UpdateBufferSize();
 
@@ -25,7 +23,6 @@ protected:
 
 	virtual void ApplyFilter(uint16_t *ppuOutputBuffer) = 0;
 	virtual void OnBeforeApplyFilter();
-	uint8_t GetFieldPhase();
 
 public:
 	BaseVideoFilter(shared_ptr<Console> console);
