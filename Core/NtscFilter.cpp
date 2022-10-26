@@ -132,7 +132,7 @@ void NtscFilter::OnBeforeApplyFilter()
 
 void NtscFilter::ApplyFilter(uint16_t *ppuOutputBuffer)
 {
-	nes_ntsc_blit(&_ntscData, ppuOutputBuffer, _ntsc_border, PPU::ScreenWidth, (_console->IsDotBypassed() ? GetFieldPhase() : IsOddFrame()), PPU::ScreenWidth, 240, _ntscBuffer, NES_NTSC_OUT_WIDTH(PPU::ScreenWidth)*4);
+	nes_ntsc_blit(&_ntscData, ppuOutputBuffer, _ntsc_border, PPU::ScreenWidth, (_console->IsDotBypassed() ? GetFieldPhase() : (IsOddFrame() ? 0 : 2)), PPU::ScreenWidth, 240, _ntscBuffer, NES_NTSC_OUT_WIDTH(PPU::ScreenWidth)*4);
 	GenerateArgbFrame(_ntscBuffer);
 }
 
