@@ -52,11 +52,17 @@ bool BaseVideoFilter::IsOddFrame()
 	return _isOddFrame;
 }
 
+uint8_t BaseVideoFilter::GetFieldPhase()
+{
+	return _fieldPhase;
+}
+
 void BaseVideoFilter::SendFrame(uint16_t *ppuOutputBuffer, uint32_t frameNumber)
 {
 	_frameLock.Acquire();
 	_overscan = _console->GetSettings()->GetOverscanDimensions();
-	_isOddFrame = frameNumber % 2;
+	_isOddFrame = frameNumber & 0x01;
+	_fieldPhase = frameNumber % 3;
 	UpdateBufferSize();
 	OnBeforeApplyFilter();
 	ApplyFilter(ppuOutputBuffer);

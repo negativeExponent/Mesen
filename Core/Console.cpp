@@ -568,6 +568,11 @@ uint32_t Console::GetFrameCount()
 	return _ppu ? _ppu->GetFrameCount() : 0;
 }
 
+bool Console::IsDotBypassed()
+{
+	return _ppu ? _ppu->IsDotBypassed() : false;
+}
+
 NesModel Console::GetModel()
 {
 	return _model;
