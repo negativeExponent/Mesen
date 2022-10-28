@@ -55,14 +55,7 @@ void NtscFilter::OnBeforeApplyFilter()
 		}
 	}
 
-	if (_console->GetModel() == NesModel::NTSC) {
-		// BG color borders on NTSC machines
-		_ntsc_border = _console->GetPpu()->GetCurrentBgColor();
-	}
-	else {
-		// black borders on other machines
-		_ntsc_border = 15;
-	}
+	_ntscBorder = (_console->GetModel() == NesModel::NTSC);
 
 	PictureSettings pictureSettings = _console->GetSettings()->GetPictureSettings();
 	NtscFilterSettings ntscSettings = _console->GetSettings()->GetNtscFilterSettings();
@@ -132,7 +125,14 @@ void NtscFilter::OnBeforeApplyFilter()
 
 void NtscFilter::ApplyFilter(uint16_t *ppuOutputBuffer)
 {
-	nes_ntsc_blit(&_ntscData, ppuOutputBuffer, _ntsc_border, PPU::ScreenWidth, _console->GetStartingPhase(), PPU::ScreenWidth, 240, _ntscBuffer, NES_NTSC_OUT_WIDTH(PPU::ScreenWidth)*4);
+	nes_ntsc_blit(&_ntscData,
+		ppuOutputBuffer,
+		_ntscBorder ? _console->GetPpu()->GetCurrentBgColor() : 0x0F,
+		PPU::ScreenWidth,
+		_console->GetStartingPhase(),
+		PPU::ScreenWidth,
+		240, _ntscBuffer,
+		NES_NTSC_OUT_WIDTH(PPU::ScreenWidth)*4);
 	GenerateArgbFrame(_ntscBuffer);
 }
 
