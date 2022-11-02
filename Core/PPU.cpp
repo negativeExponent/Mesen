@@ -114,30 +114,31 @@ void PPU::SetNesModel(NesModel model)
 {
 	_nesModel = model;
 
+	// https://www.nesdev.org/wiki/Cycle_reference_chart
 	switch(_nesModel) {
 		case NesModel::Auto:
 			//Should never be Auto
 			break;
 
 		case NesModel::NTSC:
-			_nmiScanline = 241;
-			_vblankEnd = 260;
-			_standardNmiScanline = 241;
-			_standardVblankEnd = 260;
+			_nmiScanline = 240 + 1;		// picture height + postrender blanking lines
+			_vblankEnd = 240 + 20;		// picture height + (postrender blanking lines - 1) + vblank length
+			_standardNmiScanline = _nmiScanline;
+			_standardVblankEnd = _vblankEnd;
 			_masterClockDivider = 4;
 			break;
 		case NesModel::PAL:
-			_nmiScanline = 241;
-			_vblankEnd = 310;
-			_standardNmiScanline = 241;
-			_standardVblankEnd = 310;
+			_nmiScanline = 239 + 1;		// picture height + postrender blanking lines
+			_vblankEnd = 239 + 70;		// picture height + (postrender blanking lines - 1) + vblank length
+			_standardNmiScanline = _nmiScanline;
+			_standardVblankEnd = _vblankEnd;
 			_masterClockDivider = 5;
 			break;
 		case NesModel::Dendy:
-			_nmiScanline = 291;
-			_vblankEnd = 310;
-			_standardNmiScanline = 291;
-			_standardVblankEnd = 310;
+			_nmiScanline = 239 + 51;		// picture height + postrender blanking lines
+			_vblankEnd = 239 + 50 + 20;	// picture height + (postrender blanking lines - 1) + vblank length
+			_standardNmiScanline = _nmiScanline;
+			_standardVblankEnd = _vblankEnd;
 			_masterClockDivider = 5;
 			break;
 	}
