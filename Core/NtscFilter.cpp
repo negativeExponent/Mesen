@@ -129,7 +129,7 @@ void NtscFilter::ApplyFilter(uint16_t *ppuOutputBuffer)
 		ppuOutputBuffer,
 		_ntscBorder ? _console->GetPpu()->GetCurrentBgColor() : 0x0F,
 		PPU::ScreenWidth,
-		_console->GetStartingPhase(),
+		_console->GetModel() == NesModel::NTSC ? _console->GetStartingPhase() : 0,
 		PPU::ScreenWidth,
 		240, _ntscBuffer,
 		NES_NTSC_OUT_WIDTH(PPU::ScreenWidth)*4);
