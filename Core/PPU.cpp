@@ -121,22 +121,28 @@ void PPU::SetNesModel(NesModel model)
 			break;
 
 		case NesModel::NTSC:
-			_nmiScanline = 240 + 1;		// picture height + postrender blanking lines
-			_vblankEnd = 240 + 20;		// picture height + (postrender blanking lines - 1) + vblank length
+			// picture height + postrender blanking lines
+			_nmiScanline = 240 + 1;
+			// picture height + (postrender blanking lines - 1) + vblank length
+			_vblankEnd = 240 + 20;
 			_standardNmiScanline = _nmiScanline;
 			_standardVblankEnd = _vblankEnd;
 			_masterClockDivider = 4;
 			break;
 		case NesModel::PAL:
-			_nmiScanline = 239 + 1;		// picture height + postrender blanking lines
-			_vblankEnd = 239 + 70;		// picture height + (postrender blanking lines - 1) + vblank length
+			// (picture height + border line) + postrender blanking lines
+			_nmiScanline = 240 + 1;
+			// (picture height + border line) + (postrender blanking lines - 1) + vblank length + 50
+			_vblankEnd = 240 + 20 + 50;
 			_standardNmiScanline = _nmiScanline;
 			_standardVblankEnd = _vblankEnd;
 			_masterClockDivider = 5;
 			break;
 		case NesModel::Dendy:
-			_nmiScanline = 239 + 51;		// picture height + postrender blanking lines
-			_vblankEnd = 239 + 50 + 20;	// picture height + (postrender blanking lines - 1) + vblank length
+			// (picture height + border line) + postrender blanking lines + 50
+			_nmiScanline = 240 + 1 + 50;
+			// (picture height + border line) + (postrender blanking lines - 1) + 50 + vblank length
+			_vblankEnd = 240 + 50 + 20;
 			_standardNmiScanline = _nmiScanline;
 			_standardVblankEnd = _vblankEnd;
 			_masterClockDivider = 5;
@@ -1344,11 +1350,11 @@ void PPU::Exec()
 		}
 	}
 
-	_startingPhase = _cycle % 3;
-
 	if(_needStateUpdate) {
 		UpdateState();
 	}
+
+	_startingPhase = _cycle % 3;
 }
 
 void PPU::UpdateState()
