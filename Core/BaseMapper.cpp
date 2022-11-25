@@ -633,6 +633,12 @@ void BaseMapper::Initialize(RomData &romData)
 		}
 	}
 
+	if(romData.Info.MiscRoms) {
+		_miscRomSize = (uint32_t)romData.MiscRomsData.size();
+		_miscRom = new uint8_t[_miscRomSize];
+		memcpy(_miscRom, romData.MiscRomsData.data(), _miscRomSize);
+	}
+
 	SetupDefaultWorkRam();
 
 	SetMirroringType(romData.Info.Mirroring);
@@ -655,6 +661,7 @@ BaseMapper::~BaseMapper()
 	delete[] _saveRam;
 	delete[] _workRam;
 	delete[] _nametableRam;
+	delete[] _miscRom;
 }
 
 void BaseMapper::GetMemoryRanges(MemoryRanges &ranges)
@@ -782,7 +789,7 @@ uint8_t BaseMapper::DebugReadRAM(uint16_t addr)
 
 void BaseMapper::WriteRAM(uint16_t addr, uint8_t value)
 {
-	if((addr == 0x4016) & (_console->GetCpu()->GetCycleCount() % 2 == 1)){ WriteEPSM(addr, value); }
+	if(addr == 0x4016){ WriteEPSM(addr, value); }
 	if ((addr >= 0x401c && addr <= 0x401f)) {WriteEPSM(addr, value); }
 	if(_isWriteRegisterAddr[addr]) {
 		if(_hasBusConflicts) {
