@@ -3,6 +3,7 @@
 #include "Snapshotable.h"
 #include "APU.h"
 #include "BaseExpansionAudio.h"
+#include "Console.h"
 
 class Namco163Audio : public BaseExpansionAudio
 {
@@ -143,7 +144,7 @@ protected:
 public:
 	Namco163Audio(shared_ptr<Console> console) : BaseExpansionAudio(console)
 	{
-		memset(_internalRam, 0, sizeof(_internalRam));
+		_console->InitializeRam(_internalRam, sizeof(_internalRam));
 		memset(_channelOutput, 0, sizeof(_channelOutput));
 		_ramPosition = 0;
 		_autoIncrement = false;
