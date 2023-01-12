@@ -60,6 +60,7 @@ protected:
 	void InitMapper() override
 	{
 		_audio.reset(new Namco163Audio(_console));
+		_audio->InitializeInternalRam(HasBattery());
 
 		switch(_romInfo.MapperID) {
 			case 19:

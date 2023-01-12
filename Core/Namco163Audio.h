@@ -144,7 +144,7 @@ protected:
 public:
 	Namco163Audio(shared_ptr<Console> console) : BaseExpansionAudio(console)
 	{
-		_console->InitializeRam(_internalRam, sizeof(_internalRam));
+		memset(_internalRam, 0, sizeof(_internalRam));
 		memset(_channelOutput, 0, sizeof(_channelOutput));
 		_ramPosition = 0;
 		_autoIncrement = false;
@@ -152,6 +152,14 @@ public:
 		_currentChannel = 7;
 		_lastOutput = 0;
 		_disableSound = false;
+	}
+
+	void InitializeInternalRam(bool hasBattery)
+	{
+		if (!hasBattery)
+		{
+			_console->InitializeRam(_internalRam, sizeof(_internalRam));
+		}
 	}
 
 	uint8_t* GetInternalRam()
