@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "BaseMapper.h"
 
-// UNL-KS106C
+// UNL-KS106C (Mapper 352)
 // - Kaiser 4-in-1(Unl,KS106C)[p1] - B-Wings, Kung Fu, 1942, SMB1 (wrong mirroring)
 
 class UnlKs106C : public BaseMapper
