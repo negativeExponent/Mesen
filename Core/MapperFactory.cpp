@@ -777,7 +777,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 340: return new BmcK3036();
 		case 341: return new BmcTj03();
 		case 342: break; //COOLGIRL
-		//343
+		case 343: return new BmcResetNromX1n1();
 		case 344: return new MMC3_BmcGn26();
 		case 345: return new MMC3_BmcL6in1();
 		case 346: return new Kaiser7012();
@@ -785,7 +785,8 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 348: return new Bmc830118C();
 		case 349: return new BmcG146();
 		case 350: return new Bmc891227();
-		// 351-352:
+		// 351
+		case 352: return new UnlKs106C();
 		case 353: return new MMC3_353();
 		case 356: return new MMC3_356();
 		case 357: return new Mapper357();
@@ -920,8 +921,6 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case UnifBoards::Unl255in1: return new Unl255in1();
 		case UnifBoards::Unl8237A: return new Unl8237A(); //mapper 215.1
 		case UnifBoards::UnlPuzzle: return new UnlPuzzle();
-		case UnifBoards::Ks106C: return new UnlKs106C(); //mapper 352, sub 1
-		case UnifBoards::ResetNromX1n1: return new BmcResetNromX1n1(); //352
 
 		case MapperFactory::StudyBoxMapperID: return new StudyBox();
 		case MapperFactory::NsfMapperID: return new NsfMapper();
