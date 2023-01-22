@@ -10,6 +10,7 @@ private:
 protected:
 	virtual uint16_t RegisterStartAddress() override { return 0x6000; }
 	virtual uint16_t RegisterEndAddress() override { return 0xFFFF; }
+	virtual uint16_t GetChrRamPageSize() override { return (_romInfo.SubMapperID == 13) ? 0x400 : 0; }
 
 	virtual void StreamState(bool saving) override
 	{
@@ -31,6 +32,9 @@ protected:
 		} else {
 			page &= 0xFF;
 			page |= ((_extraReg & 0x04) | ((_extraReg >> 4) & 0x02)) << 7;
+		}
+		if((_romInfo.SubMapperID == 13) && ((_extraReg & 3) == 3)) {
+			memoryType = ChrMemoryType::ChrRam;
 		}
 		MMC3::SelectCHRPage(slot, page, memoryType);
 	}
