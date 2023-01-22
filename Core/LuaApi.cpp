@@ -826,6 +826,9 @@ int LuaApi::GetAccessCounters(lua_State *lua)
 				lua_rawseti(lua, -2, i);
 			}
 			break;
+		
+		default:
+			break;
 	}
 
 	return 1;
