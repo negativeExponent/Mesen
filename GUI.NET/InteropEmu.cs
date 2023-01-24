@@ -1368,6 +1368,7 @@ namespace Mesen.GUI
 		[MarshalAs(UnmanagedType.I1)]
 		public bool WriteToggle;
 
+		public UInt16 bgTileAddr;
 		public UInt16 HighBitShift;
 		public UInt16 LowBitShift;
 	}
