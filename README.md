@@ -13,6 +13,8 @@ Changes include:
 [Original website (https://www.mesen.ca)](https://www.mesen.ca)  
 [Documentation](https://novasquirrel.github.io/Mesen-X/index.html)
 
+You should probably use [Mesen2](https://mesen.ca/) instead if you are able to.
+
 ## Development Builds
 
 Development builds of the latest commit are available from GitHub actions. For stable release builds, see the **Releases** section below.
@@ -45,10 +47,6 @@ The following packages need to be installed to run Mesen:
 
 **Note:** **Mono 5.18 or higher is recommended**, some older versions of Mono (e.g 4.2.2) have some stability and performance issues which can cause crashes and slow down the UI.
 The default Mono version in Ubuntu 18.04 is 4.6.2 (which also causes some layout issues in Mesen).  To install the latest version of Mono, follow the instructions here: https://www.mono-project.com/download/stable/#download-lin
-
-### Arch Linux
-
-Packages are available here: <https://aur.archlinux.org/packages/mesen-x-git>
 
 ## Roadmap
 
