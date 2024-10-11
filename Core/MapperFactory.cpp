@@ -259,6 +259,7 @@
 #include "MMC3_269.h"
 #include "MMC3_291.h"
 #include "MMC3_334.h"
+#include "MMC3_373.h"
 #include "MMC3_353.h"
 #include "MMC3_356.h"
 #include "MMC3_361.h"
@@ -801,6 +802,7 @@ BaseMapper* MapperFactory::GetMapperFromID(RomData &romData)
 		case 369: return new MMC3_369();
 		case 370: return new MMC3_370();
 		case 372: return new MMC3_372();
+		case 373: return new MMC3_373();
 		case 374: return new MMC1_374();
 		case 375: return new Mapper375();
 		case 376: return new MMC3_376();
@@ -956,4 +958,3 @@ shared_ptr<BaseMapper> MapperFactory::InitializeFromFile(shared_ptr<Console> con
 	}
 	return nullptr;
 }
-
